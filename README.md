@@ -7,8 +7,13 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2020/21
 
 ## Tematika
 
-Izbrali si boste temo, s katero se bo vaš projekt ukvarjal.
-Tukaj boste napisali, kje ste dobili podatke, ter kakšen je vaš cilj.
+Analizirala bom povprečne plače v Sloveniji in Evropi. Za Slovenijo bom pogledala, kako se povprečne plače razlikujejo glede na statistične regije, starost in spol v obdobju 2008 - 2019. Primerjala bom še, kako se plače in BDP spreminjajo skozi leta po statističnih regijah. Nato bom analizirala, kako se povprečne plače razlikujejo po posameznih državah v Evropi. Na koncu si bom zopet ogledala BDP posamezne države  v obdobju 2008 - 2019, ter kako je povezan s plačo, oziroma obratno.
+
+Viri:
+
+* https://pxweb.stat.si/SiStat/sl/ (CSV)
+* https://www.wikipedia.org/ (HTML)
+* https://ec.europa.eu/eurostat (CSV)
 
 ## Program
 
