@@ -2,24 +2,23 @@ library(readr)
 library(dplyr)
 library(tidyr)
 
-uvoz1 <- read.csv2("podatki/SLO_place.csv", skip=2, na=c("z", "Z", "-")) 
+uvoz1 <- read.csv2("podatki/SLO_place.csv", skip=2, na=c("z", "Z", "-")) %>%
+  mutate(LETO=parse_number(LETO))
 
-moski <- uvoz1 %>% select(c(1, 2, 4, 7, 10, 13, 16, 19, 22)) %>% 
-  rename("STAROST_SKUPAJ"=3, "15-64"=4, "15-24"=5,"25-34"=6, "35-44"=7, "45-54"=8, "55-64"=9) %>%
-  mutate(SPOL="moški")
+spol <- function(stolpci, ime) {
+  uvoz1 %>% select(stolpci) %>% 
+    rename("Skupaj"=3, "15-64"=4, "15-24"=5,"25-34"=6, "35-44"=7, "45-54"=8, "55-64"=9) %>% 
+    mutate(SPOL=ime) %>%
+    pivot_longer(c(-1,-2,-10), names_to="STAROST", values_to="PLACE") %>%
+    pivot_wider(names_from = LETO, values_from = PLACE)
+}
 
-zenske <- uvoz1 %>% select(c(1, 2, 5, 8, 11, 14, 17, 20, 23)) %>% 
-  rename("STAROST_SKUPAJ"=3, "15-64"=4, "15-24"=5,"25-34"=6, "35-44"=7, "45-54"=8, "55-64"=9) %>%
-  mutate(SPOL="ženske")
+zenske <- spol(c(1, 2, 5, 8, 11, 14, 17, 20, 23), "ženske")
+moski <- spol(c(1, 2, 4, 7, 10, 13, 16, 19, 22),"moški")
+skupaj <- spol(c(1, 2, 3, 6, 9, 12, 15, 18, 21),"Skupaj")
 
-skupaj <- uvoz1 %>% select(c(1, 2, 3, 6, 9, 12, 15, 18, 21)) %>% 
-  rename("STAROST_SKUPAJ"=3, "15-64"=4, "15-24"=5,"25-34"=6, "35-44"=7, "45-54"=8, "55-64"=9) %>%
-  mutate(SPOL="skupaj")
+place <- full_join(moski, zenske)
+place <- full_join(place, skupaj) %>% rename("STATISTICNA_REGIJA"="STATISTIČNA.REGIJA")
+place <- place%>% arrange(STATISTICNA_REGIJA)
 
-zdruzitev1 <- full_join(zenske, moski)
-zdruzitev1 <- full_join(zdruzitev1, skupaj)
-zdruzitev1 <- zdruzitev1[c(1,2,10,3,4,5,6,7,8,9)]
-zdruzitev1 <- zdruzitev1 %>% rename("STATISTICNA_REGIJA"="STATISTIČNA.REGIJA") %>%
-  mutate(LETO=parse_number(LETO)) %>% arrange(LETO, STATISTICNA_REGIJA)
-
-View(zdruzitev1)
+View(place)
