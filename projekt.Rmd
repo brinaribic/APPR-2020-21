@@ -26,7 +26,6 @@ source("lib/rstudio.r", encoding="UTF-8")
 
 Analizirala bom bruto povprečne plače v Sloveniji in Evropi. Osredotočila se bom, predvsem na to, kako se plače v Sloveniji razlikujejo glede na statistično regijo, spol in starost. Anlizirala bom, če lahko najdem kakšne povezave med dvigom povprečnih plač in naraščanjem BDP skozi obdobje 2008-2018. Pogledala si bom, kako se povprečne plače razlikujejo med evropskimi državami in jih primerjala z plačami po statističnih regijah v Sloveniji. Zopet bom pogledala, če je kakšna povezava med gibanjem BDP na prebivalca in povprečnimi plačami za države v Evropi.
 
-![](slike/grb.png)
 
 ***
 
@@ -46,52 +45,4 @@ Podatke sem uvozila iz statističnega urada v obliki CSV, iz Wikipedije v obliki
 
 Tabela ni v obliki *tidy data*, saj bi morale biti meritve zgolj v enem stolpcu, tukaj so pa za vsako leto posebej v svojem stolpcu zaradi boljše preglednosti in lažje analize.
 
-
-Spodnji graf prikazuje porazdelitev števila naselij v občinah.
-
-```{r histogram, fig.align='center', fig.cap='Histogram števila naselij v občinah'}
-ggplot(obcine, aes(x=naselja)) + geom_histogram() +
-  ggtitle("Pogostost števila naselij") + xlab("Število naselij") + ylab("Število občin")
-```
-
 ***
-
-# Analiza in vizualizacija podatkov
-
-```{r vizualizacija, results='hide'}
-source("vizualizacija/vizualizacija.r", encoding="UTF-8")
-```
-
-Spodnji zemljevid prikazuje povprečno velikost družine za vsako občino.
-
-```{r zemljevid, fig.align='center', fig.cap='Zemljevid povprečnega števila otrok v družini'}
-tm_shape(merge(zemljevid, povprecja, by.x="OB_UIME", by.y="obcina")) +
-  tm_polygons("povprecje", title="Povprečje") +
-  tm_layout(title="Povprečno število otrok v družini")
-```
-
-***
-
-# Napredna analiza podatkov
-
-```{r analiza}
-source("analiza/analiza.r", encoding="UTF-8")
-```
-
-Spodnji graf prikazuje povezavo med številom naselij in površino občine.
-
-```{r graf, fig.align='center', fig.cap='Povezava med številom naselij in površino občine'}
-ggplot(inner_join(obcine, data.frame(obcina=names(skupine),
-                                     skupina=factor(skupine)), by="obcina")
-, aes(x=povrsina, y=naselja, color=skupina, size=prebivalci/1000)) + geom_point() +
-  ggtitle("Število naselij glede na površino občine") +
-  xlab(expression("Površina (km"^2 * ")")) + ylab("Št. naselij") +
-  guides(color=guide_legend(title="Skupina"),
-         size=guide_legend(title="Prebivalci (* 1000)"))
-```
-
-***
-
-```{r shiny}
-shinyAppDir("shiny", options=list(width="100%", height=600))
-```
