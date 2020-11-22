@@ -32,10 +32,6 @@ place <- place %>% arrange(STATISTICNA_REGIJA) %>%
 
 uvoz2 <- read.csv2("podatki/SLO_BDP_regije.csv", skip=2, encoding = "cp1250")
 uvoz2 <- uvoz2[-c(12:22),]
-  
-#MERITVE <- parse_character(uvoz2$MERITVE, locale=locale(encoding="cp1250"))
-#MERITVE <- gsub("Mio EUR \\(fiksni tečaj 2007\\)", "BDP \\(mio EUR\\)", MERITVE)
-#MERITVE <- gsub("Na prebivalca, EUR \\(tekoči tečaj\\)", "BDP na prebivalca \\(EUR\\)", MERITVE)
 
 regije <- uvoz2 %>% pivot_longer(c(-1,-2), names_to = "REGIJE", values_to = "BDP")
 
@@ -56,10 +52,5 @@ bdp_regije <- bdp_regije %>%
   pivot_wider(names_from = LETO, values_from = bdp) %>%
   arrange(REGIJE)
 
-View(bdp_regije)
-
-
-# odstranila bi vse vrstice, v katerih se pojavlja "Struktura (Slovenija = 100%)"
-# na prebivalca v EUR, drugače v MIO
 
   
