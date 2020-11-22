@@ -24,9 +24,9 @@ source("lib/rstudio.r", encoding="UTF-8")
 
 # Izbira teme
 
-Za vzorec bomo prikazali nekaj podatkov o slovenskih občinah.
+Analizirala bom bruto povprečne plače v Sloveniji in Evropi. Osredotočila se bom, predvsem na to, kako se plače v Sloveniji razlikujejo glede na statistično regijo, spol in starost. Anlizirala bom, če lahko najdem kakšne povezave med dvigom povprečnih plač in naraščanjem BDP skozi obdobje 2008-2018. Pogledala si bom, kako se povprečne plače razlikujejo med evropskimi državami in jih primerjala z plačami po statističnih regijah v Sloveniji. Zopet bom pogledala, če je kakšna povezava med gibanjem BDP na prebivalca in povprečnimi plačami za države v Evropi.
 
-![](slike/grb.png)
+
 
 ***
 
@@ -54,6 +54,17 @@ z Wikipedije. Podatke imamo v dveh razpredelnicah v obliki *tidy data*.
   - `pokrajina` - meritev: pokrajina, ki ji občina pripada (neurejen faktor),
   - `regija` - meritev: regija, ki ji občina pripada (neurejen faktor),
   - `odcepitev` - meritev: podatki o občinah, od katerih se je občina odcepila (besedilo).
+  
+Podatke sem uvozila iz statističnega urada v obliki CSV, iz Wikipedije v obliki HTML in iz Eurostata v obliki CSV. Podatke imam v štirih razpredelnicah:
+
+1. `place` - podatki o plačah v Sloveniji glede na statistično regijo, spol in starost
+   - `STATISTICNA_REGIJA` spremenljiva: ime statistične regije (faktor)
+   - `SPOL` spremenljivka: (faktor: moski, zenske, skupaj - vsi prebivalci ne glede na spol)
+   - `STAROST` spremenljivka (faktor: po starostnih skupinah od 15 do 64 let, vsaka skupina                   vsebuje 10 let, skupaj - vsi prebivalci ne glede na starost)
+   - `2008:2019`: vsi stolpci so meritve: povprečne plače (število)
+
+Tabela ni v obliki *tidy data*, saj bi morale biti meritve zgolj v enem stolpcu, tukaj so pa za vsako leto posebej v svojem stolpcu zaradi boljše preglednosti in lažje analize.
+   
 
 **Opomba**: da bi razpredelnica `obcine` res bila v obliki *tidy data*, bi morali odstraniti stolpec `gostota` (saj je izpeljan iz stolpcev `povrsina` in `prebivalci`), podatke o pokrajinah pa bi morali premakniti v drugo razpredelnico, saj nekatere občine pripadajo dvema pokrajinama. Podobno bi morali narediti tudi s stolpcem `odcepitev`.
 
