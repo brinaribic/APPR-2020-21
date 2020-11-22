@@ -26,7 +26,7 @@ source("lib/rstudio.r", encoding="UTF-8")
 
 Analizirala bom bruto povprečne plače v Sloveniji in Evropi. Osredotočila se bom, predvsem na to, kako se plače v Sloveniji razlikujejo glede na statistično regijo, spol in starost. Anlizirala bom, če lahko najdem kakšne povezave med dvigom povprečnih plač in naraščanjem BDP skozi obdobje 2008-2018. Pogledala si bom, kako se povprečne plače razlikujejo med evropskimi državami in jih primerjala z plačami po statističnih regijah v Sloveniji. Zopet bom pogledala, če je kakšna povezava med gibanjem BDP na prebivalca in povprečnimi plačami za države v Evropi.
 
-
+![](slike/images.png)
 
 ***
 
