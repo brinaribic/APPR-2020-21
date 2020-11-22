@@ -35,25 +35,6 @@ Analizirala bom bruto povprečne plače v Sloveniji in Evropi. Osredotočila se 
 ```{r uvoz}
 source("uvoz/uvoz.r", encoding="UTF-8")
 ```
-
-Uvozili smo podatke o občinah v obliki CSV s statističnega urada ter v obliki HTML
-z Wikipedije. Podatke imamo v dveh razpredelnicah v obliki *tidy data*.
-
-1. `druzine` - podatki o družinah za vsako občino
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `velikost.druzine` - spremenljivka: število otrok v družini (število: 1, 2, 3 ali 4, kjer zadnja vrednost pomeni 4 ali več),
-  - `stevilo.druzin` - meritev: število družin z ustreznim številom otrok v ustrezni občini (število).
-
-2. `obcine` - podatki o občinah
-  - `obcina` - spremenljivka: ime občine (neurejen faktor),
-  - `povrsina` - meritev: površina občine v km$^2$ (število),
-  - `prebivalci` - meritev: prebivalstvo občine (število),
-  - `gostota` - meritev: število prebivalcev na km$^2$ (število),
-  - `naselja` - meritev: število naselij v občini (število),
-  - `ustanovitev` - meritev: leto ustanovitve občine (število),
-  - `pokrajina` - meritev: pokrajina, ki ji občina pripada (neurejen faktor),
-  - `regija` - meritev: regija, ki ji občina pripada (neurejen faktor),
-  - `odcepitev` - meritev: podatki o občinah, od katerih se je občina odcepila (besedilo).
   
 Podatke sem uvozila iz statističnega urada v obliki CSV, iz Wikipedije v obliki HTML in iz Eurostata v obliki CSV. Podatke imam v štirih razpredelnicah:
 
@@ -64,9 +45,7 @@ Podatke sem uvozila iz statističnega urada v obliki CSV, iz Wikipedije v obliki
    - `2008:2019`: vsi stolpci so meritve: povprečne plače (število)
 
 Tabela ni v obliki *tidy data*, saj bi morale biti meritve zgolj v enem stolpcu, tukaj so pa za vsako leto posebej v svojem stolpcu zaradi boljše preglednosti in lažje analize.
-   
 
-**Opomba**: da bi razpredelnica `obcine` res bila v obliki *tidy data*, bi morali odstraniti stolpec `gostota` (saj je izpeljan iz stolpcev `povrsina` in `prebivalci`), podatke o pokrajinah pa bi morali premakniti v drugo razpredelnico, saj nekatere občine pripadajo dvema pokrajinama. Podobno bi morali narediti tudi s stolpcem `odcepitev`.
 
 Spodnji graf prikazuje porazdelitev števila naselij v občinah.
 
