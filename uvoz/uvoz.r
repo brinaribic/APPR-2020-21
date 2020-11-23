@@ -35,22 +35,26 @@ uvoz2 <- uvoz2[-c(12:22),]
 
 regije <- uvoz2 %>% pivot_longer(c(-1,-2), names_to = "REGIJE", values_to = "BDP")
 
-MERITVE <- parse_character(regije$MERITVE, locale=locale(encoding="cp1250"))
-MERITVE <- gsub("Mio EUR \\(fiksni tečaj 2007\\)", "BDP \\(mio EUR\\)", MERITVE)
-MERITVE <- gsub("Na prebivalca, EUR \\(tekoči tečaj\\)", "BDP na prebivalca \\(EUR\\)", MERITVE)
+BDP <- parse_character(regije$MERITVE, locale=locale(encoding="cp1250"))
+BDP <- gsub("Mio EUR \\(fiksni tečaj 2007\\)", "BDP \\(mio EUR\\)", BDP)
+BDP <- gsub("Na prebivalca, EUR \\(tekoči tečaj\\)", "BDP na prebivalca \\(EUR\\)", BDP)
+BDP <- parse_factor(BDP)
 
 bdp <- parse_number(regije$BDP)
 
-REGIJE <- regije$REGIJE 
+REGIJE <- parse_character(regije$REGIJE, locale=locale(encoding="cp1250"))
 REGIJE <- gsub("\\.", "\\-", REGIJE)
 REGIJE <- gsub("Jugovzhodna\\-Slovenija", "Jugovzhodna\\ Slovenija", REGIJE)
+REGIJE <- parse_factor(REGIJE)
 
 LETO <- regije$LETO
 
-bdp_regije <- data.frame(MERITVE, LETO, REGIJE, bdp)
+bdp_regije <- data.frame(BDP, LETO, REGIJE, bdp)
 bdp_regije <- bdp_regije %>% 
   pivot_wider(names_from = LETO, values_from = bdp) %>%
-  arrange(REGIJE)
+  arrange(REGIJE) %>% rename("STATISTICNA_REGIJA"="REGIJE")
+
+
 
 
   
