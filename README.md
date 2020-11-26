@@ -7,7 +7,21 @@ Repozitorij z gradivi pri predmetu APPR v študijskem letu 2020/21
 
 ## Tematika
 
-Analizirala bom povprečne plače v Sloveniji in Evropi. Za Slovenijo bom pogledala, kako se povprečne plače razlikujejo glede na statistične regije, spol in starost v obdobju 2008 - 2019. Primerjala bom še, kako se plače in BDP spreminjajo skozi leta po statističnih regijah. Nato bom analizirala, kako se povprečne plače razlikujejo po posameznih državah v Evropi. Na koncu si bom ogledala BDP na prebivalca posamezne države  v obdobju 2010 - 2018, ter kako je povezan s plačo, oziroma obratno.
+Analizirala bom povprečne plače v Sloveniji in Evropi. Za Slovenijo bom pogledala, kako se povprečne plače razlikujejo glede na statistične regije, spol in starost v obdobju 2008 - 2019. Primerjala bom še, kako se plače in BDP spreminjajo skozi leta po statističnih regijah. Nato bom analizirala, kako se povprečne plače razlikujejo po posameznih državah v Evropi. Na koncu si bom ogledala BDP in BDP na prebivalca posamezne države  v obdobju 2010 - 2018, ter kako je povezan s plačo.
+
+Tabele:
+
+1. Plače v SLoveniji glede na statistično regijo, spol in starost
+- stolpci: leto, statistična regija, spol, starost, plače
+
+2. BDP in BDP na prebivalca v Sloveniji po statističnih regijah
+- stolpci: leto, statistična regija, BDP (v mio EUR), BDP na prebivalca (v EUR)
+
+3. Plače v Evropi po posameznih državah
+- stolpci: leto, država, plače
+
+4. BDP in BDP na prebivalca po državah v Evropi
+- stolpci: leto, država, BDP (v mio EUR), BDP na prebivalca (v EUR)
 
 Viri:
 
