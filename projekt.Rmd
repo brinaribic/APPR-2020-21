@@ -35,10 +35,9 @@ Analizirala bom bruto povprečne plače v Sloveniji in Evropi. Osredotočila se 
 source("uvoz/uvoz.r", encoding="UTF-8")
 ```
   
-Podatke sem uvozila iz statističnega urada v obliki CSV, iz Wikipedije v obliki HTML in iz Eurostata v obliki CSV. Podatke imam v štirih razpredelnicah:
 Podatke sem uvozila iz SURS-a v obliki CSV, iz Wikipedije v obliki HTML in iz Eurostata v obliki CSV. Podatke imam v štirih razpredelnicah:
 
-1. `place` - podatki o plačah v Sloveniji glede na statistično regijo, spol in starost
+1. `place_SLO` - podatki o plačah v Sloveniji glede na statistično regijo, spol in starost
    - `LETO`: spremenljivka: leta od 2008 do 2019 (število)
    - `STATISTICNA_REGIJA` spremenljiva: ime statistične regije (faktor)
    - `SPOL` spremenljivka: (faktor: moski, zenske, skupaj - vsi prebivalci ne glede na spol)
@@ -59,6 +58,12 @@ Tabela ni v obliki *tidy data*, ker imam dve meritvi v eni tabeli. Če bi želel
    -  `LETO` spremenljivka: obdobje(število: 2008-2018)
    - `DRZAVA` spremenljivka: države v Evropi (faktor)
    - `PLACE` meritev: povprečna bruto plača v EUR (število)
+   
+4. `BDP_skupaj` - podatki o BDP in BDP na prebivalca v evropskih državah
+   - `LETO` spremenljivka: obdobje (število: od 2008 do 2018)
+   + `DRZAVA` spremenljivka: države v Evropi (faktor)
+   - `BDP (mio EUR)` meritev: BDP v milijonih EUR (število)
+   - `BDP na prebivalca (EUR)` meritev: BDP na prebivalca v EUR (število)
    
 
 ***
