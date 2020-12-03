@@ -77,7 +77,8 @@ colnames(place_Evropa) <- c("DRZAVA", 2008:2018)
 place_Evropa <- place_Evropa %>% 
   mutate(DRZAVA=gsub("\\[[^]]*\\]","", DRZAVA), DRZAVA=parse_factor(DRZAVA)) %>%
   pivot_longer(-c(1), names_to = "LETO", values_to = "PLACE") %>%
-  mutate(PLACE=parse_number(PLACE, na=c("-", "NA"))) 
+  mutate(PLACE=parse_number(PLACE, na=c("-", "NA"))) %>% arrange(LETO)
+place_Evropa <- place_Evropa[c(2,1,3)]
 
 # tabela BDP in BDP per capita za Evropo
 
@@ -90,8 +91,8 @@ uvoz3 <- read_csv("podatki/BDP_Evropa.csv", skip=1,
 
 bdp_Evropa <- uvoz3[-c(3,4)]
 DRZAVA <- bdp_Evropa$DRZAVA
-#DRZAVA <- str_replace(bdp_pc$DRZAVA, "Kosovo [\\(\\)\\w /0-9]+","Kosovo")
-#DRZAVA <- str_replace(bdp_pc$DRZAVA, "Germany [\\(\\)\\w /0-9]+","Germany")
+DRZAVA <- str_replace_all(DRZAVA, " \\s*\\([^\\)]+\\)","") 
+DRZAVA <- parse_factor(DRZAVA)
 LETO <- bdp_Evropa$LETO
 BDP <- bdp_Evropa$BDP
 
@@ -107,8 +108,8 @@ uvoz4 <- read_csv("podatki/BDP_per_capita_Evropa.csv", skip=1,
 
 bdp_pc <- uvoz4[-c(3,4)]
 DRZAVA <- bdp_pc$DRZAVA
-#DRZAVA <- str_replace(bdp_pc$DRZAVA, "Kosovo [\\(\\)\\w /0-9]+", "Kosovo") 
-#DRZAVA <- str_replace(bdp_pc$DRZAVA, "Germany [\\(\\)\\w /0-9]+", "Germany")
+DRZAVA <- str_replace_all(DRZAVA, " \\s*\\([^\\)]+\\)","") 
+DRZAVA <- parse_factor(DRZAVA)
 LETO <- bdp_pc$LETO
 BDP <- round(bdp_pc$BDP)
 

@@ -36,19 +36,30 @@ source("uvoz/uvoz.r", encoding="UTF-8")
 ```
   
 Podatke sem uvozila iz statističnega urada v obliki CSV, iz Wikipedije v obliki HTML in iz Eurostata v obliki CSV. Podatke imam v štirih razpredelnicah:
+Podatke sem uvozila iz SURS-a v obliki CSV, iz Wikipedije v obliki HTML in iz Eurostata v obliki CSV. Podatke imam v štirih razpredelnicah:
 
 1. `place` - podatki o plačah v Sloveniji glede na statistično regijo, spol in starost
+   - `LETO`: spremenljivka: leta od 2008 do 2019 (število)
    - `STATISTICNA_REGIJA` spremenljiva: ime statistične regije (faktor)
    - `SPOL` spremenljivka: (faktor: moski, zenske, skupaj - vsi prebivalci ne glede na spol)
    - `STAROST` spremenljivka: (faktor: po starostnih skupinah od 15 do 64 let, vsaka skupina           vsebuje 10 let, skupaj - vsi prebivalci ne glede na starost)
-   - `2008:2019`: vsi stolpci so meritve: povprečne plače (število)
-
-Tabela ni v obliki *tidy data*, saj bi morale biti meritve zgolj v enem stolpcu, tukaj so pa za vsako leto posebej v svojem stolpcu zaradi boljše preglednosti in lažje analize.
+   - `PLACE` meritev: plače (število)
+   
 
 2. `bdp_regije` - podatki o BDP in BDP na prebivalca v statističnih regijah v Sloveniji
-   -  `BDP` spremenljivka: BDP v milijonih EUR in BDP na prebivalca v EUR (faktor)
+   - `LETO`: spremenljivka: obdobje (število: od 2008 do 2018)
    - `STATISTICNA_REGIJA` spremenljiva: ime statistične regije (faktor)
-   - `2008:2018`: vsi stolpci so meritve: Vrednosti BDP in BDP na prebivalca (število)
+   - `BDP` spremenljivka: (faktor: BDP v milijonih EUR in BDP na prebivalca v EUR )
+   - `BDP (mio EUR)` meritev: BDP v milijonih EUR (število)
+   - `BDP na prebivalca (EUR)` meritev: BDP na prebivalca v EUR (število)
+   
+Tabela ni v obliki *tidy data*, ker imam dve meritvi v eni tabeli. Če bi želela imeti v *tidy data* bi morala iz tabele `bdp_regije` narediti dve ločeni tabeli, prva bi vsebovala vse spremenljivke in celotni BDP, druga pa tudi vse spremenljivke in BDP na prebivalca.
+   
+3. `place_Evropa` - podatki o plačah za posamezne države v Evropi
+   -  `LETO` spremenljivka: obdobje(število: 2008-2018)
+   - `DRZAVA` spremenljivka: države v Evropi (faktor)
+   - `PLACE` meritev: povprečna bruto plača v EUR (število)
+   
 
 ***
 
