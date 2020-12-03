@@ -5,9 +5,10 @@ library(stringr)
 
 # tabela s plačami po regijah glede na spol in starost
 
-uvoz1 <- read.csv2("podatki/SLO_place.csv", skip=2, na=c("z", "Z", "-"),
-                   encoding="cp1250") %>%
-  mutate(LETO=parse_number(LETO))
+uvoz1 <- read_csv2("podatki/SLO_place.csv", skip=2, na=c("z", "Z", "-"),
+                   locale=locale(encoding="Windows-1250")) %>%
+  mutate(LETO=parse_number(LETO)) %>% 
+  rename("STATISTICNA_REGIJA"="STATISTIČNA REGIJA")
 
 
 spol <- function(stolpci, ime) {
@@ -21,35 +22,33 @@ zenske <- spol(c(1, 2, 5, 8, 11, 14, 17, 20, 23), "ženske")
 moski <- spol(c(1, 2, 4, 7, 10, 13, 16, 19, 22),"moški")
 skupaj <- spol(c(1, 2, 3, 6, 9, 12, 15, 18, 21),"Skupaj")
 
-place <- full_join(moski, zenske)
-place <- full_join(place, skupaj) %>% rename("STATISTICNA_REGIJA"="STATISTIČNA.REGIJA")
-place <- place %>%
-  mutate(STATISTICNA_REGIJA=parse_factor(STATISTICNA_REGIJA, locale=locale(encoding="cp1250"))) %>%
-  mutate(SPOL=parse_factor(SPOL,locale=locale(encoding="cp1250"))) %>%
-  mutate(STAROST=parse_factor(STAROST,locale=locale(encoding="cp1250"))) %>%
-  arrange(STATISTICNA_REGIJA)
+place_SLO <- full_join(moski, zenske)
+place_SLO <- full_join(place_SLO, skupaj)
+
+place_SLO <- full_join(moski, zenske)
+place_SLO <- full_join(place_SLO, skupaj) 
 
 
 # tabela BDP za Slovenijo
 
-uvoz2 <- read.csv2("podatki/SLO_BDP_regije.csv", skip=2, encoding = "cp1250")
+uvoz2 <- read_csv2("podatki/SLO_BDP_regije.csv", skip=2, locale=locale(encoding="cp1250"))
 uvoz2 <- uvoz2[-c(12:22),]
 
-regije <- uvoz2 %>% pivot_longer(c(-1,-2), names_to = "REGIJE", values_to = "BDP")
+uvoz2 <- uvoz2 %>% pivot_longer(c(-1,-2), names_to = "REGIJE", values_to = "BDP")
 
-BDP <- parse_character(regije$MERITVE, locale=locale(encoding="cp1250"))
+BDP <- parse_character(uvoz2$MERITVE)
 BDP <- gsub("Mio EUR \\(fiksni tečaj 2007\\)", "BDP \\(mio EUR\\)", BDP)
 BDP <- gsub("Na prebivalca, EUR \\(tekoči tečaj\\)", "BDP na prebivalca \\(EUR\\)", BDP)
 BDP <- parse_factor(BDP)
 
-MERITEV <- parse_number(regije$BDP)
-
-REGIJE <- parse_character(regije$REGIJE, locale=locale(encoding="cp1250"))
-REGIJE <- gsub("\\.", "\\-", REGIJE)
-REGIJE <- gsub("Jugovzhodna\\-Slovenija", "Jugovzhodna\\ Slovenija", REGIJE)
+REGIJE <- parse_character(uvoz2$REGIJE)
+REGIJE <- str_replace_all(REGIJE, "\\.", "\\-")
+REGIJE <- str_replace_all(REGIJE, "Jugovzhodna\\-Slovenija", "Jugovzhodna\\ Slovenija")
 REGIJE <- parse_factor(REGIJE)
 
-LETO <- regije$LETO
+LETO <- uvoz2$LETO
+
+MERITEV <- uvoz2$BDP
 
 bdp_regije <- data.frame(BDP, LETO, REGIJE, MERITEV)
 bdp_regije <- bdp_regije %>% 
@@ -116,6 +115,7 @@ BDP <- round(bdp_pc$BDP)
 bdp_pc <- data.frame(LETO, DRZAVA, BDP) %>% 
   rename("BDP na prebivalca (EUR)"="BDP")
 
+# zdruzitev tabele bdp_Evropa in bdp_pc
 
 bdp_skupaj <- inner_join(bdp_pc, bdp_Evropa, by=c("LETO","DRZAVA"))
 
