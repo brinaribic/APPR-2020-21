@@ -13,21 +13,16 @@ uvoz1 <- read_csv2("podatki/SLO_place.csv", skip=2, na=c("z", "Z", "-"),
 
 spol <- function(stolpci, ime) {
   uvoz1 %>% select(stolpci) %>% 
-    rename("Skupaj"=3, "15-64"=4, "15-24"=5,"25-34"=6, "35-44"=7, "45-54"=8, "55-64"=9) %>% 
+    rename("15-24"=3,"25-34"=4, "35-44"=5, "45-54"=6, "55-64"=7, "65 ali več"=8) %>% 
     mutate(SPOL=ime) %>%
-    pivot_longer(c(-1,-2,-10), names_to="STAROST", values_to="PLACE")
+    pivot_longer(c(-1,-2,-9), names_to="STAROST", values_to="PLACE")
 }
 
-zenske <- spol(c(1, 2, 5, 8, 11, 14, 17, 20, 23), "ženske")
-moski <- spol(c(1, 2, 4, 7, 10, 13, 16, 19, 22),"moški")
-skupaj <- spol(c(1, 2, 3, 6, 9, 12, 15, 18, 21),"Skupaj")
+zenske <- spol(c(1, 2, 4, 6, 8, 10, 12, 14), "ženske")
+moski <- spol(c(1, 2, 3, 5, 7, 9, 11, 13), "moški")
 
-place_SLO <- full_join(moski, zenske)
-place_SLO <- full_join(place_SLO, skupaj)
-
-place_SLO <- full_join(moski, zenske)
-place_SLO <- full_join(place_SLO, skupaj) 
-
+place_SLO <- full_join(moski, zenske) %>% 
+  arrange(LETO, STATISTICNA_REGIJA, STAROST) %>% drop_na()
 
 # tabela BDP za Slovenijo
 
@@ -37,8 +32,8 @@ uvoz2 <- uvoz2[-c(12:22),]
 uvoz2 <- uvoz2 %>% pivot_longer(c(-1,-2), names_to = "REGIJE", values_to = "BDP")
 
 BDP <- parse_character(uvoz2$MERITVE)
-BDP <- gsub("Mio EUR \\(fiksni tečaj 2007\\)", "BDP \\(mio EUR\\)", BDP)
-BDP <- gsub("Na prebivalca, EUR \\(tekoči tečaj\\)", "BDP na prebivalca \\(EUR\\)", BDP)
+BDP <- gsub("Mio EUR \\(fiksni tečaj 2007\\)", "BDP", BDP)
+BDP <- gsub("Na prebivalca, EUR \\(tekoči tečaj\\)", "BDP_na_prebivalca", BDP)
 BDP <- parse_factor(BDP)
 
 REGIJE <- parse_character(uvoz2$REGIJE)
@@ -76,8 +71,8 @@ colnames(place_Evropa) <- c("DRZAVA", 2008:2018)
 place_Evropa <- place_Evropa %>% 
   mutate(DRZAVA=gsub("\\[[^]]*\\]","", DRZAVA), DRZAVA=parse_factor(DRZAVA)) %>%
   pivot_longer(-c(1), names_to = "LETO", values_to = "PLACE") %>%
-  mutate(PLACE=parse_number(PLACE, na=c("-", "NA"))) %>% arrange(LETO)
-place_Evropa <- place_Evropa[c(2,1,3)]
+  mutate(PLACE=parse_number(PLACE, na=c("-", "NA")), LETO=parse_number(LETO)) %>% arrange(LETO) 
+place_Evropa <- place_Evropa[c(2,1,3)] %>% drop_na()
 
 # tabela BDP in BDP per capita za Evropo
 
@@ -95,8 +90,7 @@ DRZAVA <- parse_factor(DRZAVA)
 LETO <- bdp_Evropa$LETO
 BDP <- bdp_Evropa$BDP
 
-bdp_Evropa <- data.frame(LETO, DRZAVA, BDP) %>% 
-  rename("BDP (mio EUR)"="BDP")
+bdp_Evropa <- data.frame(LETO, DRZAVA, BDP)
 
 ## tabela BDP per capita
 
@@ -113,11 +107,12 @@ LETO <- bdp_pc$LETO
 BDP <- round(bdp_pc$BDP)
 
 bdp_pc <- data.frame(LETO, DRZAVA, BDP) %>% 
-  rename("BDP na prebivalca (EUR)"="BDP")
+  rename("BDP_na_prebivalca"="BDP")
 
 # zdruzitev tabele bdp_Evropa in bdp_pc
 
 bdp_skupaj <- inner_join(bdp_pc, bdp_Evropa, by=c("LETO","DRZAVA"))
+
 
 
 
