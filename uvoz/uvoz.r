@@ -26,30 +26,27 @@ place_SLO <- full_join(moski, zenske) %>%
 
 # tabela BDP za Slovenijo
 
-uvoz2 <- read_csv2("podatki/SLO_BDP_regije.csv", skip=2, locale=locale(encoding="cp1250"))
-uvoz2 <- uvoz2[-c(12:22),]
+uvoz2.1 <- read_csv2("podatki/SLO_BDP_regije.csv", 
+                     skip=2, 
+                     n_max=11, 
+                     locale=locale(encoding="cp1250"))
 
-uvoz2 <- uvoz2 %>% pivot_longer(c(-1,-2), names_to = "REGIJE", values_to = "BDP")
+uvoz2.1 <- uvoz2.1 %>% 
+  pivot_longer(c(-1,-2), names_to = "REGIJE", values_to = "BDP") %>% 
+  rename("STATISTICNA_REGIJA"="REGIJE")
 
-BDP <- parse_character(uvoz2$MERITVE)
-BDP <- gsub("Mio EUR \\(fiksni tečaj 2007\\)", "BDP", BDP)
-BDP <- gsub("Na prebivalca, EUR \\(tekoči tečaj\\)", "BDP_na_prebivalca", BDP)
-BDP <- parse_factor(BDP)
+bdp_SLO <- uvoz2.1[,-c(1)]
 
-REGIJE <- parse_character(uvoz2$REGIJE)
-REGIJE <- str_replace_all(REGIJE, "\\.", "\\-")
-REGIJE <- str_replace_all(REGIJE, "Jugovzhodna\\-Slovenija", "Jugovzhodna\\ Slovenija")
-REGIJE <- parse_factor(REGIJE)
+uvoz2.2 <- read_csv2("podatki/SLO_BDP_regije.csv", 
+                     skip=2, 
+                     locale=locale(encoding="cp1250"))
+uvoz2.2 <- uvoz2.2[-c(1:22),]
 
-LETO <- uvoz2$LETO
+uvoz2.2 <- uvoz2.2 %>% 
+  pivot_longer(c(-1,-2), names_to = "REGIJE", values_to = "BDP")
 
-MERITEV <- uvoz2$BDP
-
-bdp_regije <- data.frame(BDP, LETO, REGIJE, MERITEV)
-bdp_regije <- bdp_regije %>% 
-  rename("STATISTICNA_REGIJA"="REGIJE") %>% 
-  pivot_wider(-c(1), names_from=BDP, values_from=MERITEV)
-
+bdp_pc_SLO <- uvoz2.2[,-c(1)] %>% 
+  rename("STATISTICNA_REGIJA"="REGIJE")
 
 
 # tabela povprečnih plač v Evropi v EUR
@@ -106,12 +103,10 @@ DRZAVA <- parse_factor(DRZAVA)
 LETO <- bdp_pc$LETO
 BDP <- round(bdp_pc$BDP)
 
-bdp_pc <- data.frame(LETO, DRZAVA, BDP) %>% 
+bdp_pc_Evropa <- data.frame(LETO, DRZAVA, BDP) %>% 
   rename("BDP_na_prebivalca"="BDP")
 
-# zdruzitev tabele bdp_Evropa in bdp_pc
 
-bdp_skupaj <- inner_join(bdp_pc, bdp_Evropa, by=c("LETO","DRZAVA"))
 
 
 

@@ -60,16 +60,20 @@ ggplot(place_SLO %>%
 
 ```
 
-2. `bdp_regije` - podatki o BDP in BDP na prebivalca v statističnih regijah v Sloveniji
+2. `bdp_SLO` - podatki o BDP v statističnih regijah v Sloveniji
    - `LETO`: spremenljivka: obdobje (število: od 2008 do 2018)
-   - `STATISTICNA_REGIJA` spremenljiva: ime statistične regije (faktor)
+   - `STATISTICNA_REGIJA` spremenljiva: ime statistične regije (niz)
    - `BDP` meritev: BDP v milijonih EUR (število)
+   
+3. `bdp_regije` - podatki BDP na prebivalca v statističnih regijah v Sloveniji
+   - `LETO`: spremenljivka: obdobje (število: od 2008 do 2018)
+   - `STATISTICNA_REGIJA` spremenljiva: ime statistične regije (niz)
    - `BDP_na_prebivalca` meritev: BDP na prebivalca v EUR (število)
 
    
 Tabela ni v obliki *tidy data*, ker imam dve meritvi v eni tabeli. Če bi želela imeti v *tidy data* bi morala iz tabele `bdp_regije` narediti dve ločeni tabeli, prva bi vsebovala vse spremenljivke in celotni BDP, druga pa tudi vse spremenljivke in BDP na prebivalca.
    
-3. `place_Evropa` - podatki o plačah za posamezne države v Evropi
+4. `place_Evropa` - podatki o plačah za posamezne države v Evropi
    - `LETO` spremenljivka: obdobje(število: 2008-2018)
    - `DRZAVA` spremenljivka: države v Evropi (niz)
    - `PLACE` meritev: povprečna bruto plača v EUR (število)
@@ -90,10 +94,14 @@ ggplot(place_Evropa %>%
 ```
 
    
-4. `bdp_skupaj` - podatki o BDP in BDP na prebivalca v evropskih državah
+5. `bdp_Evropa` - podatki o BDP in v evropskih državah
    - `LETO` spremenljivka: obdobje (število: od 2008 do 2018)
    - `DRZAVA` spremenljivka: države v Evropi (niz)
    - `BDP` meritev: BDP v milijonih EUR (število)
+   
+6. `bdp_pc_Evropa` - podatki o BDP na prebivalca v evropskih državah
+   - `LETO` spremenljivka: obdobje (število: od 2008 do 2018)
+   - `DRZAVA` spremenljivka: države v Evropi (niz)
    - `BDP_na_prebivalca` meritev: BDP na prebivalca v EUR (število)
    
 
