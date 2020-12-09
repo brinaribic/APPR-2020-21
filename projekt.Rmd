@@ -32,27 +32,27 @@ Analizirala bom bruto povprečne plače v Sloveniji in Evropi. Osredotočila se 
 # Obdelava, uvoz in čiščenje podatkov
 
 ```{r uvoz}
-source("uvoz/uvoz.r", encoding="UTF-8")
+source("uvoz/uvoz1.r", encoding="UTF-8")
 ```
   
 Podatke sem uvozila iz SURS-a v obliki CSV, iz Wikipedije v obliki HTML in iz Eurostata v obliki CSV. Podatke imam v štirih razpredelnicah:
 
 1. `place_SLO` - podatki o plačah v Sloveniji glede na statistično regijo, spol in starost
-   - `LETO`: spremenljivka: leta od 2008 do 2019 (število)
-   - `STATISTICNA_REGIJA` spremenljiva: ime statistične regije (niz)
-   - `SPOL` spremenljivka: (niz: moski, zenske)
-   - `STAROST` spremenljivka: (niz: po starostnih skupinah od 15 do 64 let, vsaka skupina          vsebuje 10 let)
-   - `PLACE` meritev: plače (število)
+   - `Leto`: spremenljivka: leta od 2008 do 2018 (število)
+   - `Regija` spremenljiva: ime statistične regije (niz)
+   - `Spol` spremenljivka: (niz: moski, zenske)
+   - `Starost` spremenljivka: (niz: po starostnih skupinah od 15 do 64 let, vsaka skupina          vsebuje 10 let)
+   - `Placa` meritev: plače (število)
    
-Graf prikazuje plače v regijah glede na starost za leto 2019.
+Graf prikazuje plače v regijah glede na starost za leto 2018.
 
 ```{r graf1, fig.align='center'}
 ggplot(place_SLO %>% 
-         filter(LETO == 2019) %>% 
-         group_by(STAROST, STATISTICNA_REGIJA) %>% 
-         summarise(POVPRECJE=mean(PLACE)), aes(x=STATISTICNA_REGIJA, y=POVPRECJE, fill=factor(STAROST))) + 
+         filter(Leto == 2018) %>% 
+         group_by(Starost, Regija) %>% 
+         summarise(Povprecje=mean(Placa)), aes(x=Regija, y=Povprecje, fill=factor(Starost))) + 
   geom_col(position = "dodge") + 
-  labs(title="Plače po regijah glede na starost za leto 2019", fill="Starost") + 
+  labs(title="Plače po regijah glede na starost za leto 2018", fill="Starost") + 
   xlab("Statistična regija") + 
   ylab("Plača (v EUR)") +
   theme(axis.text.x=element_text(size=10, hjust=0.95, angle=45)) +
@@ -61,32 +61,32 @@ ggplot(place_SLO %>%
 ```
 
 2. `bdp_SLO` - podatki o BDP v statističnih regijah v Sloveniji
-   - `LETO`: spremenljivka: obdobje (število: od 2008 do 2018)
-   - `STATISTICNA_REGIJA` spremenljiva: ime statistične regije (niz)
+   - `Leto`: spremenljivka: obdobje (število: od 2008 do 2018)
+   - `Regija` spremenljiva: ime statistične regije (niz)
    - `BDP` meritev: BDP v milijonih EUR (število)
    
 3. `bdp_regije` - podatki BDP na prebivalca v statističnih regijah v Sloveniji
-   - `LETO`: spremenljivka: obdobje (število: od 2008 do 2018)
-   - `STATISTICNA_REGIJA` spremenljiva: ime statistične regije (niz)
+   - `Leto`: spremenljivka: obdobje (število: od 2008 do 2018)
+   - `Regija` spremenljiva: ime statistične regije (niz)
    - `BDP_na_prebivalca` meritev: BDP na prebivalca v EUR (število)
 
    
 Tabela ni v obliki *tidy data*, ker imam dve meritvi v eni tabeli. Če bi želela imeti v *tidy data* bi morala iz tabele `bdp_regije` narediti dve ločeni tabeli, prva bi vsebovala vse spremenljivke in celotni BDP, druga pa tudi vse spremenljivke in BDP na prebivalca.
    
 4. `place_Evropa` - podatki o plačah za posamezne države v Evropi
-   - `LETO` spremenljivka: obdobje(število: 2008-2018)
-   - `DRZAVA` spremenljivka: države v Evropi (niz)
-   - `PLACE` meritev: povprečna bruto plača v EUR (število)
+   - `Leto` spremenljivka: obdobje(število: 2008-2018)
+   - `Drzava` spremenljivka: države v Evropi (niz)
+   - `Placa` meritev: povprečna bruto plača v EUR (število)
 
 Spodnji graf prikazuje plače evropskih držav, kjer vertikalna črta prikazuje povprečno plačo v Evropi.
    
 ```{r graf2, fig.align='center'}
 ggplot(place_Evropa %>% 
-         filter(LETO == 2018) %>% 
-         mutate(pogoj=if_else(DRZAVA == "Slovenia", "slo", "nic")), 
-       aes(x=PLACE, y=DRZAVA, fill=pogoj)) + 
+         filter(Leto == 2018) %>% 
+         mutate(pogoj=if_else(Drzava == "Slovenia", "slo", "nic")), 
+       aes(x=Placa, y=Drzava, fill=pogoj)) + 
   geom_col() + 
-  geom_vline(xintercept = mean(place_Evropa$PLACE), col="dark blue") + 
+  geom_vline(xintercept = mean(place_Evropa$Placa), col="dark blue") + 
   labs(title = "Plače v Evropskih državah za leto 2018") + 
   xlab("Plače (EUR)")+ ylab("Država") + scale_fill_brewer(palette="Dark2") + 
   theme(legend.position = "none")
@@ -95,13 +95,13 @@ ggplot(place_Evropa %>%
 
    
 5. `bdp_Evropa` - podatki o BDP in v evropskih državah
-   - `LETO` spremenljivka: obdobje (število: od 2008 do 2018)
-   - `DRZAVA` spremenljivka: države v Evropi (niz)
+   - `Leto` spremenljivka: obdobje (število: od 2008 do 2018)
+   - `Drzava` spremenljivka: države v Evropi (niz)
    - `BDP` meritev: BDP v milijonih EUR (število)
    
 6. `bdp_pc_Evropa` - podatki o BDP na prebivalca v evropskih državah
-   - `LETO` spremenljivka: obdobje (število: od 2008 do 2018)
-   - `DRZAVA` spremenljivka: države v Evropi (niz)
+   - `Leto` spremenljivka: obdobje (število: od 2008 do 2018)
+   - `Drzava` spremenljivka: države v Evropi (niz)
    - `BDP_na_prebivalca` meritev: BDP na prebivalca v EUR (število)
    
 
