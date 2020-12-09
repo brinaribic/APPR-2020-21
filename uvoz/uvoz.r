@@ -24,6 +24,8 @@ moski <- spol(c(1, 2, 3, 5, 7, 9, 11, 13), "moški")
 place_SLO <- full_join(moski, zenske) %>% 
   arrange(LETO, STATISTICNA_REGIJA, STAROST) %>% drop_na()
 
+write_csv2(place_SLO,"podatki/SLO_place_urejeno.csv")
+
 # tabela BDP za Slovenijo
 
 uvoz2.1 <- read_csv2("podatki/SLO_BDP_regije.csv", 
@@ -37,6 +39,10 @@ uvoz2.1 <- uvoz2.1 %>%
 
 bdp_SLO <- uvoz2.1[,-c(1)]
 
+write_csv2(bdp_SLO,"podatki/SLO_BDP_regije_urejeno.csv")
+
+# tabela BDP na prebivalca za Slovenijo
+
 uvoz2.2 <- read_csv2("podatki/SLO_BDP_regije.csv", 
                      skip=2, 
                      locale=locale(encoding="cp1250"))
@@ -47,6 +53,8 @@ uvoz2.2 <- uvoz2.2 %>%
 
 bdp_pc_SLO <- uvoz2.2[,-c(1)] %>% 
   rename("STATISTICNA_REGIJA"="REGIJE")
+
+write_csv2(bdp_pc_SLO,"podatki/SLO_BDPpc_regije_urejeno.csv")
 
 
 # tabela povprečnih plač v Evropi v EUR
@@ -71,9 +79,9 @@ place_Evropa <- place_Evropa %>%
   mutate(PLACE=parse_number(PLACE, na=c("-", "NA")), LETO=parse_number(LETO)) %>% arrange(LETO) 
 place_Evropa <- place_Evropa[c(2,1,3)] %>% drop_na()
 
-# tabela BDP in BDP per capita za Evropo
+write_csv2(place_Evropa,"podatki/place_Evropa_urejeno.csv")
 
-## tabela BDP
+# tabela BDP
 
 uvoz3 <- read_csv("podatki/BDP_Evropa.csv", skip=1,   
                   locale=locale(encoding = "cp1250"), 
@@ -88,6 +96,8 @@ LETO <- bdp_Evropa$LETO
 BDP <- bdp_Evropa$BDP
 
 bdp_Evropa <- data.frame(LETO, DRZAVA, BDP)
+
+write_csv2(bdp_Evropa,"podatki/bdp_Evropa_urejeno.csv")
 
 ## tabela BDP per capita
 
@@ -106,6 +116,7 @@ BDP <- round(bdp_pc$BDP)
 bdp_pc_Evropa <- data.frame(LETO, DRZAVA, BDP) %>% 
   rename("BDP_na_prebivalca"="BDP")
 
+write_csv2(bdp_pc_Evropa,"podatki/bdp_pc_Evropa_urejeno.csv")
 
 
 
