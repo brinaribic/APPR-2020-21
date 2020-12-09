@@ -69,9 +69,6 @@ ggplot(place_SLO %>%
    - `Leto`: spremenljivka: obdobje (število: od 2008 do 2018)
    - `Regija` spremenljiva: ime statistične regije (niz)
    - `BDP_na_prebivalca` meritev: BDP na prebivalca v EUR (število)
-
-   
-Tabela ni v obliki *tidy data*, ker imam dve meritvi v eni tabeli. Če bi želela imeti v *tidy data* bi morala iz tabele `bdp_regije` narediti dve ločeni tabeli, prva bi vsebovala vse spremenljivke in celotni BDP, druga pa tudi vse spremenljivke in BDP na prebivalca.
    
 4. `place_Evropa` - podatki o plačah za posamezne države v Evropi
    - `Leto` spremenljivka: obdobje(število: 2008-2018)
