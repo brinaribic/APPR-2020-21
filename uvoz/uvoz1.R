@@ -15,6 +15,12 @@ uvoz.csv2 <- function(ime, stolpci, od, sep) {
 stolpci1 <- c("Leto","Regija", "Starost", "Spol", "Placa")
 place_SLO <- uvoz.csv2("podatki/SLO_place1.csv", stolpci1, 3) %>% drop_na()
 
+povprecje <- place_SLO %>% 
+  .[-c(3)] %>% 
+  filter(Leto == 2018) %>% 
+  group_by(Regija) %>%
+  summarise(Povprecje=round(mean(Placa)))
+
 # tabela BDP po regijah
 
 stolpci2 <- c("Meritev", "Leto", "Regija", "BDP")
