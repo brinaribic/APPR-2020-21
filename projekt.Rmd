@@ -81,7 +81,7 @@ Spodnji graf prikazuje plače evropskih držav, kjer vertikalna črta prikazuje 
 ggplot(place_Evropa %>% 
          filter(Leto == 2018) %>% 
          mutate(pogoj=if_else(Drzava == "Slovenia", "slo", "nic")), 
-       aes(x=Placa, y=Drzava, fill=pogoj)) + 
+       aes(x=Placa, y=reorder(Drzava, -Placa), fill=pogoj)) + 
   geom_col() + 
   geom_vline(xintercept = mean(place_Evropa$Placa), col="dark blue") + 
   labs(title = "Plače v Evropskih državah za leto 2018") + 
@@ -101,6 +101,29 @@ ggplot(place_Evropa %>%
    - `Drzava` spremenljivka: države v Evropi (niz)
    - `BDP_na_prebivalca` meritev: BDP na prebivalca v EUR (število)
    
+# Analiza in vizualizacija podatkov
+
+```{r vizualizacija, results='hide'}
+source("vizualizacija/vizualizacija.r", encoding="UTF-8")
+```
+
+Spodnji zemljevid prikazuje povprečne plače v posameznih regijah. Razvidno je, da so najnižje plače v zasavski regiji, najvišje pa v osrednjeslovenski, kar bi tudi pričakovala, saj je tukaj glavno mesto. Zanimivo se mi zdi, da imamo v posavju najvišje plače v Sloveniji. Sklepam, da povprečje dvigujejo plače v NEK.
+```{r zemljevid1, fig.align='center'}
+print(zemljevid.plac)
+```
+
+V preteklosti so bile razlike med spoli zelo velike na vseh področjih. To se seveda pozna tudi pri plačah. Iz spodnjega grafa je razvidno, da se ta razlika zmanjšuje. Opazim pa tudi, da so plače pri moških bolj nihale  kot pa pri ženskah, pri le teh v opazovanem obdobju zgolj naraščajo. 
+```{r graf3, fig.align='center'}
+print(graf.spol)
+```
+
+Spodnja dva grafa prikazujeta plače in BDP na prebivalca v regijah z najvišjimi plačami in regiji z najnižjimi plačami.
+```{r graf45, figures-side, fig.show="hold", out.width="50%"}
+print(graf.bdp)
+print(graf.plac)
+```
+
+
 
 ***
 
