@@ -79,5 +79,17 @@ bdp_Evropa <- bdp_Evropa %>% .[,-c(2)] %>% mutate(Drzava = Drzava) %>% .[c(1,3,2
 stolpci5 <- c("Leto","Drzava", "Enota","Meritev", "BDP_na_prebivalca", "x")
 bdp_pc_Evropa <- uvoz.csv("podatki/BDP_per_capita_Evropa.csv", stolpci5, 1) %>% .[,-c(3,4,6)] 
 Drzava <- str_replace_all(bdp_pc_Evropa$Drzava, " \\s*\\([^\\)]+\\)","") 
-bdp_pc_Evropa <- bdp_pc_Evropa %>% .[,-c(2)] %>% mutate(Drzava = Drzava) %>% .[c(1,3,2)]
+bdp_pc_Evropa <- bdp_pc_Evropa %>% .[,-c(2)] %>% mutate(Drzava = Drzava) %>% .[c(1,3,2)] %>% drop_na()
+
+rast.plac <- place_Evropa %>%
+  group_by(Leto) %>% 
+  summarise(povprecje=round(mean(Placa)))%>%
+  mutate(rast=(povprecje-lag(povprecje))/povprecje*100) %>% select(Leto, rast) %>% drop_na() 
+
+rast.BDPpc <- bdp_pc_Evropa %>%
+  group_by(Leto) %>% 
+  summarise(povprecje=round(mean(BDP_na_prebivalca))) %>%
+  mutate(rast=(povprecje-lag(povprecje))/povprecje*100) %>% select(Leto, rast) %>% drop_na()
+
+
 
