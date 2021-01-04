@@ -10,6 +10,8 @@ output:
 runtime: shiny
 ---
 
+![](slike/slika.jpg)
+
 ```{r setup, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 
@@ -24,7 +26,7 @@ source("lib/rstudio.r", encoding="UTF-8")
 
 # Izbira teme
 
-Analizirala bom bruto povprečne plače v Sloveniji in Evropi. Osredotočila se bom na to, kako se plače v Sloveniji razlikujejo glede na statistično regijo, spol in starost. Skušala bom poiskati povezave med rastjo povprečnih plač in BDP skozi obdobje 2008-2018. Pogledala si bom, kako se povprečne plače razlikujejo med evropskimi državami in jih primerjala z plačami po statističnih regijah v Sloveniji. Zopet bom pogledala, če je kakšna povezava med gibanjem BDP na prebivalca in povprečnimi plačami za države v Evropi.
+Analizirala bom bruto povprečne plače v Sloveniji in Evropi. Osredotočila se bom na to, kako se plače v Sloveniji razlikujejo glede na statistično regijo, spol in starost. Skušala bom poiskati povezave med rastjo povprečnih plač in BDP skozi obdobje 2008-2018. Pogledala si bom, kako se povprečne plače razlikujejo med evropskimi državami in jih primerjala s plačami po statističnih regijah v Sloveniji. Zopet bom pogledala, če je kakšna povezava med gibanjem BDP na prebivalca in povprečnimi plačami za države v Evropi.
 
 
 ***
@@ -43,22 +45,6 @@ Podatke sem uvozila iz SURS-a v obliki CSV, iz Wikipedije v obliki HTML in iz Eu
    - `Spol` spremenljivka: (niz: moski, zenske)
    - `Starost` spremenljivka: (niz: po starostnih skupinah od 15 do 64 let, vsaka skupina          vsebuje 10 let)
    - `Placa` meritev: plače (število)
-   
-Graf prikazuje plače v regijah glede na starost za leto 2018.
-
-```{r graf1, fig.align='center'}
-ggplot(place_SLO %>% 
-         filter(Leto == 2018) %>% 
-         group_by(Starost, Regija) %>% 
-         summarise(Povprecje=mean(Placa)), aes(x=Regija, y=Povprecje, fill=factor(Starost))) + 
-  geom_col(position = "dodge") + 
-  labs(title="Plače po regijah glede na starost za leto 2018", fill="Starost") + 
-  xlab("Statistična regija") + 
-  ylab("Plača (v EUR)") +
-  theme(axis.text.x=element_text(size=10, hjust=0.95, angle=45)) +
-  scale_fill_brewer(palette="Dark2")
-
-```
 
 2. `bdp_SLO` - podatki o BDP v statističnih regijah v Sloveniji
    - `Leto`: spremenljivka: obdobje (število: od 2008 do 2018)
@@ -74,22 +60,6 @@ ggplot(place_SLO %>%
    - `Leto` spremenljivka: obdobje(število: 2008-2018)
    - `Drzava` spremenljivka: države v Evropi (niz)
    - `Placa` meritev: povprečna bruto plača v EUR (število)
-
-Spodnji graf prikazuje plače evropskih držav, kjer vertikalna črta prikazuje povprečno plačo v Evropi.
-   
-```{r graf2, fig.align='center'}
-ggplot(place_Evropa %>% 
-         filter(Leto == 2018) %>% 
-         mutate(pogoj=if_else(Drzava == "Slovenia", "slo", "nic")), 
-       aes(x=Placa, y=reorder(Drzava, -Placa), fill=pogoj)) + 
-  geom_col() + 
-  geom_vline(xintercept = mean(place_Evropa$Placa), col="dark blue") + 
-  labs(title = "Plače v Evropskih državah za leto 2018") + 
-  xlab("Plače (EUR)")+ ylab("Država") + scale_fill_brewer(palette="Dark2") + 
-  theme(legend.position = "none")
-
-```
-
    
 5. `bdp_Evropa` - podatki o BDP in v evropskih državah
    - `Leto` spremenljivka: obdobje (število: od 2008 do 2018)
@@ -107,9 +77,15 @@ ggplot(place_Evropa %>%
 source("vizualizacija/vizualizacija.r", encoding="UTF-8")
 ```
 
-Spodnji zemljevid prikazuje povprečne plače v posameznih regijah. Razvidno je, da so najnižje plače v zasavski regiji, najvišje pa v osrednjeslovenski, kar bi tudi pričakovala, saj je tukaj glavno mesto. Zanimivo se mi zdi, da imamo v posavju najvišje plače v Sloveniji. Sklepam, da povprečje dvigujejo plače v NEK.
+Spodnji zemljevid prikazuje povprečne plače v posameznih regijah. Razvidno je, da so najnižje plače v zasavski regiji, najvišje pa v osrednjeslovenski, kar bi tudi pričakovala, saj je tukaj glavno mesto. Zanimivo se mi zdi, da so v Posavju zelo visoke plače. Sklepam, da povprečje dvigujejo plače v elektrogospodarstvu (NEK, GEN energija).
 ```{r zemljevid1, fig.align='center'}
 print(zemljevid.plac)
+```
+
+Spodnja dva grafa prikazujeta plače in BDP na prebivalca v regijah z najvišjimi plačami in regiji z najnižjimi plačami. 
+```{r graf45, figures-side, fig.show="hold", out.width="50%"}
+print(graf.bdp)
+print(graf.plac)
 ```
 
 V preteklosti so bile razlike med spoli zelo velike na vseh področjih. To se seveda pozna tudi pri plačah. Iz spodnjega grafa je razvidno, da se ta razlika zmanjšuje. Opazim pa tudi, da so plače pri moških bolj nihale  kot pa pri ženskah, pri le teh v opazovanem obdobju zgolj naraščajo. 
@@ -117,13 +93,21 @@ V preteklosti so bile razlike med spoli zelo velike na vseh področjih. To se se
 print(graf.spol)
 ```
 
-Spodnja dva grafa prikazujeta plače in BDP na prebivalca v regijah z najvišjimi plačami in regiji z najnižjimi plačami.
-```{r graf45, figures-side, fig.show="hold", out.width="50%"}
-print(graf.bdp)
-print(graf.plac)
+V Evropi so velike razlike med povprečnimi plačami v državah. Iz spodnjega grafa opazim, da je večina držav pod evropskim povprečjem. Opazim pa tudi, da so se plače v razvitejših državah nekoliko bolj povečale v letu 2018 glede na leto 2008, kar nakazuje še na večjo neenakost med državami. Izjema je zgolj Velika Britanija, v kateri so se plače v opazovanem obdobju znižale. Sklepam, da zato, ker jih leta 2008 kriza še ni prizadela oz. se to ni poznalo pri plačah, potem pa si niso opomogli še desetletje po krizi.
+
+```{r graf4, fig.align='center'}
+print(graf.placEvropa)
+```
+Plače so le eden izmed pokazateljev razlik med državami v Evropi. Eden izmed glavnih je BDP na prebivalca. To prikazuje spodnja tabela. Opazim, da so velike razlike med državami tudi glede na BDP.
+
+```{r graf5, fig.align='center'}
+print(graf.bdpEvropa)
 ```
 
-
+Zadnji graf prikazuje rast BDP na prebivalca in rast plač v Evropi. Na začetku opazovanega obdobja (med letoma 2009 in 2010) je BDP močno narastel, saj so države v večini že vzpostavljale nazaj gospodarstvo po krizi. Plače pa so padale še kar nekaj let po krizi, šele med letoma 2014 in 15 so se povečale.
+```{r graf6, fig.align='center'}
+print(graf.rasti)
+```
 
 ***
 
