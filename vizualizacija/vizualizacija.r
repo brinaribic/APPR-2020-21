@@ -1,20 +1,17 @@
-require(tmap)
-require(RColorBrewer)
-
 source("lib/uvozi.zemljevid.r")
-source("lib/libraries.r", encoding = "UTF-8")
 
 zemljevid.regij <- uvozi.zemljevid("https://biogeo.ucdavis.edu/data/gadm3.6/shp/gadm36_SVN_shp.zip", 
-                                   "gadm36_SVN_1") 
+                                   "gadm36_SVN_1", 
+                                   encoding = "UTF-8")
+
+
 koordinate <- coordinates(zemljevid.regij) %>% as_tibble()
 zemljevid.regij <- zemljevid.regij %>% fortify()
 
 zemljevid.regij <- zemljevid.regij %>%
   mutate(Regija=NAME_1 %>%
-           str_replace("GoriĹˇka", "Goriška") %>%
-           str_replace("KoroĹˇka", "Koroška") %>%
-           str_replace("Notranjsko-kraĹˇka","Primorsko-notranjska") %>%
-           str_replace("Obalno-kraĹˇka","Obalno-kraška") %>%
+           str_replace("Notranjsko-kraška","Primorsko-notranjska") %>%
+           str_replace("Obalno-kraška","Obalno-kraška") %>%
            str_replace("Spodnjeposavska","Posavska"))
 
 zemljevid.regij <- inner_join(povprecje, zemljevid.regij, by="Regija")
