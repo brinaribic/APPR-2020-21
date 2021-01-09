@@ -7,7 +7,6 @@ output:
     includes:
       in_header: lib/styles.sty
     latex_engine: xelatex
-runtime: shiny
 ---
 
 ![](slike/slika.jpg)
@@ -34,7 +33,7 @@ Analizirala bom bruto povprečne plače v Sloveniji in Evropi. Osredotočila se 
 # Obdelava, uvoz in čiščenje podatkov
 
 ```{r uvoz}
-source("uvoz/uvoz1.r", encoding="UTF-8")
+source("uvoz/uvoz1.R", encoding="UTF-8")
 ```
   
 Podatke sem uvozila iz SURS-a v obliki CSV, iz Wikipedije v obliki HTML in iz Eurostata v obliki CSV. Podatke imam v štirih razpredelnicah:
