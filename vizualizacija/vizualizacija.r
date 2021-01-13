@@ -132,8 +132,8 @@ graf.rasti <- ggplot(rast.plac,
                      aes(x=Leto, y=rast)) + 
   geom_line(aes(color="Plače"), size=1) + 
   geom_line(data=rast.BDPpc, aes(color="BDP na prebivalca"),size=1) +
-  scale_x_continuous(breaks=2009:2018) +
+  scale_x_continuous(breaks=2009:2018, limits = c(2009,2018)) +
   labs(title="Rast BDP na prebivalca in rast plač v Evropi", y = "Rast (v %)", color="") + 
   scale_color_manual(values = barve) +
   theme_bw()
-
+print(graf.rasti)
