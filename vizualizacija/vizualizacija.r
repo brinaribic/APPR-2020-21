@@ -136,4 +136,3 @@ graf.rasti <- ggplot(rast.plac,
   labs(title="Rast BDP na prebivalca in rast plač v Evropi", y = "Rast (v %)", color="") + 
   scale_color_manual(values = barve) +
   theme_bw()
-print(graf.rasti)
