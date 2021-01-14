@@ -79,19 +79,23 @@ graf.plac <- ggplot(data = place_SLO %>%
   labs(title="Plače v štirih slovenskih regijah") + 
   theme_bw()
 
-# place glede na spol v obdobju 2008-2018 za SLO
+# place glede na spol v obdobju 2008-2018 za za regije z najvišjimi in najnižjimi plačami
 
 graf.spol <- ggplot(
-  place_SLO %>% group_by(Leto, Spol) %>% summarise(Placa=round(mean(Placa))),
+  place_SLO %>% 
+    filter(Regija %in% v) %>% 
+    group_by(Leto, Spol, Regija) %>% 
+    summarise(Placa=round(mean(Placa))),
   aes(x=Leto, y=Placa, color=Spol)
 ) + 
   geom_point() + 
-  geom_line(size=1) +
+  geom_line() +
+  facet_wrap(~Regija) +
   ylab("Plača") + 
   scale_x_continuous(breaks=2008:2018) +
   labs(title="Razlike v plačah glede na spol v Sloveniji") +
-  theme_bw()
-
+  theme_bw() +  
+  theme(axis.text.x = element_text(angle = 45))
 
 
 # plače v Evropi za leto 2008, 2012 in 2018
@@ -101,16 +105,13 @@ graf.placEvropa <- ggplot(place_Evropa %>%
          filter(!(Drzava %in% c("Albania","Kosovo", "Belgium", "Denmark"))), 
        aes(x=Placa, y=reorder(Drzava, -Placa), fill=factor(Leto))) + 
   geom_col(position = "dodge") + 
-  labs(title = "Plače v evropskih državah za leto 2008 in 2018") + 
   xlab("Plače (EUR)")+ 
   ylab("Država") +
   geom_vline(mapping=aes(xintercept = mean(place_Evropa %>% filter(Leto==2018) %>%.$Placa,
-                                           fill="Povprecje 2018")),
-             col="#D95F02") +
+                                           fill="Povprecje 2018")), col="#00BFC4") +
   geom_vline(mapping=aes(xintercept = mean(place_Evropa %>% filter(Leto==2008) %>%.$Placa,
-                                           fill="Povprecje 2008")),
-             col="#1B9E77") +
-  scale_fill_brewer("Leto", palette="Dark2") +
+                                           fill="Povprecje 2008")), col="#F8766D") +
+  labs(title = "Plače v evropskih državah za leto 2008 in 2018", fill="Leto") +
   theme_bw()
 
 # BDP na prebivalca v Evropi
@@ -119,11 +120,29 @@ graf.bdpEvropa <- ggplot(bdp_pc_Evropa %>%
                             filter(!(Drzava %in% c("Liechtenstein","North Macedonia", "Kosovo"))), 
                           aes(x=BDP_na_prebivalca, y=reorder(Drzava, -BDP_na_prebivalca), fill=factor(Leto))) + 
   geom_col(position = "dodge") +
-  xlab("BDP na prebivalca (EUR)")+ 
-  ylab("Država") +
-  scale_fill_brewer("Leto", palette="Dark2") + 
-  labs(title = "BDP na prebivalca v evropskih državah za leto 2008 in 2018") + 
+  xlab("BDP na prebivalca (v EUR)")+ 
+  ylab("Država")  + 
+  geom_vline(mapping=aes(xintercept = mean(bdp_pc_Evropa %>% filter(Leto==2018) %>%.$BDP_na_prebivalca,
+                                           fill="Povprecje 2018")), col="#00BFC4") +
+  geom_vline(mapping=aes(xintercept = mean(bdp_pc_Evropa %>% filter(Leto==2008) %>%.$BDP_na_prebivalca,
+                                           fill="Povprecje 2008")), col="#F8766D") +
+  labs(title = "BDP na prebivalca v evropskih državah za leto 2008 in 2018", fill="Leto") + 
   theme_bw()
+
+
+# plače v posameznih državah v primerjavi s Slovenijo
+drzave <- c("Austria", "Slovenia", "Croatia", "Germany","Cyprus")
+
+graf.drzave <- ggplot(place_Evropa %>% filter(Drzava %in% drzave),
+                      aes(x=Leto, y=Placa)) + 
+  geom_line(aes(color=factor(Drzava))) +
+  geom_point(aes(color=factor(Drzava))) + 
+  scale_x_continuous(breaks=2008:2018) +
+  ylab("Plača (v EUR)") +
+  labs(title="Primerjava plač nekaterih evropskih držav", color="Država") +
+  theme_bw()
+
+
 
 # rast povprecnih plac in bdp za celotno Evropo
 barve <- c("Plače" = "#D95F02", "BDP na prebivalca" = "#1B9E77" )
@@ -131,8 +150,9 @@ barve <- c("Plače" = "#D95F02", "BDP na prebivalca" = "#1B9E77" )
 graf.rasti <- ggplot(rast.plac, 
                      aes(x=Leto, y=rast)) + 
   geom_line(aes(color="Plače"), size=1) + 
-  geom_line(data=rast.BDPpc, aes(color="BDP na prebivalca"),size=1) +
-  scale_x_continuous(breaks=2009:2018, limits = c(2009,2018)) +
-  labs(title="Rast BDP na prebivalca in rast plač v Evropi", y = "Rast (v %)", color="") + 
-  scale_color_manual(values = barve) +
+  geom_line(data=rast.BDP, aes(color="BDP"),size=1) +
+  scale_x_continuous(breaks=2009:2018) +
+  labs(title="Rast BDP in rast plač v Evropi", y = "Rast (v %)", color="") + 
   theme_bw()
+
+
