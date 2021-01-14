@@ -117,6 +117,15 @@ print(graf.rasti)
 ```
 
 # Napredna analiza podatkov
+```{r analiza, results='hide'}
+source("analiza/analiza.r", encoding="UTF-8")
+```
+Spodnji graf prikazuje plače do leta 2020 v Sloveniji. Vidim, da pride do velikega odstopanja, saj model ne more napovedati krize, še posebej ne takšne vrste krize, ki je bila leta 2020
+
+```{r napoved1, fig.align='center'}
+print(graf.napoved1)
+```
+
 
 ```{r shiny}
 shinyAppDir("shiny", options=list(width="100%", height=600))
