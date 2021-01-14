@@ -1,17 +1,11 @@
 library(shiny)
 
-shinyUI(fluidPage(
+fluidPage(
+  selectInput(inputId = "regija",
+              label = "Izberi regijo",
+              choices = unique(place_SLO$Regija), selected=unique(place_SLO$Regija)[1]),
+  plotOutput("starosti")
+)
+
+
   
-  titlePanel("Slovenske občine"),
-  
-  tabsetPanel(
-      tabPanel("Velikost družine",
-               DT::dataTableOutput("druzine")),
-      
-      tabPanel("Število naselij",
-               sidebarPanel(
-                  uiOutput("pokrajine")
-                ),
-               mainPanel(plotOutput("naselja")))
-    )
-))

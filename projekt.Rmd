@@ -7,6 +7,7 @@ output:
     includes:
       in_header: lib/styles.sty
     latex_engine: xelatex
+runtime: shiny
 ---
 
 ![](slike/slika.jpg)
@@ -103,10 +104,24 @@ Plače so le eden izmed pokazateljev razlik med državami v Evropi. Eden izmed g
 print(graf.bdpEvropa)
 ```
 
-Zadnji graf prikazuje rast BDP na prebivalca in rast plač v Evropi. Na začetku opazovanega obdobja (med letoma 2009 in 2010) je BDP močno narastel, saj so države v večini že vzpostavljale nazaj gospodarstvo po krizi. Plače pa so padale še kar nekaj let po krizi, šele med letoma 2014 in 15 so se povečale.
+Spodnji graf prikazuje primerjavo plač zgolj nekaterih evropskih držav. Izbrala sem le tiste, ki imajo podobne plače kot v Sloveniji in Avstrijo ter Nemčijo. Avstrijo sem izbrala zato, ker je veliko Slovencev tam zaposlenih, še posebej tistih, ki živijo na koroškem. To je tudi razlog, da so v tej regiji plače v višjo kot v večina ostalih regijah (razvidno je iz zgornjega zemljevida).
+
 ```{r graf6, fig.align='center'}
+print(graf.drzave)
+```
+
+
+Zadnji graf prikazuje rast BDP na prebivalca in rast plač v Evropi. Na začetku opazovanega obdobja (med letoma 2009 in 2010) je BDP močno narastel, saj so države v večini že vzpostavljale nazaj gospodarstvo po krizi. Plače pa so padale še kar nekaj let po krizi, šele med letoma 2014 in 15 so se povečale.
+```{r graf7, fig.align='center'}
 print(graf.rasti)
 ```
+
+# Napredna analiza podatkov
+
+```{r shiny}
+shinyAppDir("shiny", options=list(width="100%", height=600))
+```
+
 
 ***
 

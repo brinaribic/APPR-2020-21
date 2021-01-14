@@ -1,24 +1,16 @@
 library(shiny)
 
-shinyServer(function(input, output) {
-  output$druzine <- DT::renderDataTable({
-    druzine %>% pivot_wider(names_from="velikost.druzine", values_from="stevilo.druzin") %>%
-      rename(`Občina`=obcina)
+function(input, output) {
+  output$starosti<- renderPlot({
+     ggplot(place.starost %>%
+                             filter(Regija == input$regija)) + 
+      aes(x=Leto, y=Placa, fill=Starost) +
+      geom_col(position = "dodge") +
+      labs(title = "Plače po starosti v regiji") +
+      ylab("Plača (v EUR)") + 
+      scale_x_continuous(breaks=2008:2018) +
+      theme_bw()
   })
-  
-  output$pokrajine <- renderUI(
-    selectInput("pokrajina", label="Izberi pokrajino",
-                choices=c("Vse", levels(obcine$pokrajina)))
-  )
-  output$naselja <- renderPlot({
-    main <- "Pogostost števila naselij"
-    if (!is.null(input$pokrajina) && input$pokrajina %in% levels(obcine$pokrajina)) {
-      t <- obcine %>% filter(pokrajina == input$pokrajina)
-      main <- paste(main, "v regiji", input$pokrajina)
-    } else {
-      t <- obcine
-    }
-    ggplot(t, aes(x=naselja)) + geom_histogram() +
-      ggtitle(main) + xlab("Število naselij") + ylab("Število občin")
-  })
-})
+}
+
+
