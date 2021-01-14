@@ -21,8 +21,8 @@ povprecje <- place_SLO %>%
   group_by(Regija) %>%
   summarise(Povprecje=round(mean(Placa)))
 
-place.starost <- place_SLO %>% 
-  group_by(Leto, Regija, Starost) %>%
+place <- place_SLO %>% 
+  group_by(Leto) %>%
   summarise(Placa=mean(Placa))
 
 # tabela BDP po regijah

@@ -139,12 +139,12 @@ graf.drzave <- ggplot(place_Evropa %>% filter(Drzava %in% drzave),
   geom_point(aes(color=factor(Drzava))) + 
   scale_x_continuous(breaks=2008:2018) +
   ylab("Plača (v EUR)") +
-  labs(title="Primerjava plač nekaterih evropskih držav", color="Država") +
+  labs(title="Primerjava plač v nekaterih evropskih državah", color="Država") +
   theme_bw()
 
 
 
-# rast povprecnih plac in bdp za celotno Evropo
+# rast povprecnih plač in bdp za celotno Evropo
 barve <- c("Plače" = "#D95F02", "BDP na prebivalca" = "#1B9E77" )
 
 graf.rasti <- ggplot(rast.plac, 
@@ -154,5 +154,3 @@ graf.rasti <- ggplot(rast.plac,
   scale_x_continuous(breaks=2009:2018) +
   labs(title="Rast BDP in rast plač v Evropi", y = "Rast (v %)", color="") + 
   theme_bw()
-
-
