@@ -21,6 +21,10 @@ povprecje <- place_SLO %>%
   group_by(Regija) %>%
   summarise(Povprecje=round(mean(Placa)))
 
+place.starost <- place_SLO %>% 
+  group_by(Leto, Regija, Starost) %>%
+  summarise(Placa=mean(Placa))
+
 # tabela BDP po regijah
 
 stolpci2 <- c("Meritev", "Leto", "Regija", "BDP")
@@ -72,7 +76,7 @@ uvoz.csv <- function(ime, stolpci, od) {
 stolpci4 <- c("Leto","Drzava", "Enota","Meritev", "BDP", "x")
 bdp_Evropa <- uvoz.csv("podatki/BDP_Evropa.csv", stolpci4, 1) %>% .[,-c(3,4,6)] 
 Drzava <- str_replace_all(bdp_Evropa$Drzava, " \\s*\\([^\\)]+\\)","") 
-bdp_Evropa <- bdp_Evropa %>% .[,-c(2)] %>% mutate(Drzava = Drzava) %>% .[c(1,3,2)]
+bdp_Evropa <- bdp_Evropa %>% .[,-c(2)] %>% mutate(Drzava = Drzava) %>% .[c(1,3,2)] %>% drop_na()
 
 # tabela BDP na prebivalca za evropske države
 
@@ -86,9 +90,9 @@ rast.plac <- place_Evropa %>%
   summarise(povprecje=round(mean(Placa)))%>%
   mutate(rast=(povprecje-lag(povprecje))/povprecje*100) %>% select(Leto, rast) %>% drop_na() 
 
-rast.BDPpc <- bdp_pc_Evropa %>%
+rast.BDP <- bdp_Evropa %>%
   group_by(Leto) %>% 
-  summarise(povprecje=round(mean(BDP_na_prebivalca))) %>%
+  summarise(povprecje=round(mean(BDP))) %>%
   mutate(rast=(povprecje-lag(povprecje))/povprecje*100) %>% select(Leto, rast) %>% drop_na()
 
 
