@@ -76,7 +76,7 @@ graf.plac <- ggplot(data = place_SLO %>%
   geom_line(size=1) + 
   ylab("Plača (v EUR)") +
   scale_x_continuous(breaks=2008:2018) +
-  labs(title="Plače v štirih slovenskih regijah") + 
+  labs(title="Plače v štirih slovenskih regijah") +
   theme_bw()
 
 # place glede na spol v obdobju 2008-2018 za za regije z najvišjimi in najnižjimi plačami
@@ -97,8 +97,23 @@ graf.spol <- ggplot(
   theme_bw() +  
   theme(axis.text.x = element_text(angle = 45))
 
+# place glede na starost za leto 2018
 
-# plače v Evropi za leto 2008, 2012 in 2018
+graf.starost <- ggplot(
+  place_SLO %>% 
+    filter(Leto==2018) %>%
+    group_by(Starost,Regija) %>%
+    summarise(Placa=round(mean(Placa))),
+  aes(x=Regija, y=Placa, fill=Starost)
+) +
+  geom_col(position = "dodge") +
+  labs(title = "Plače glede na starosti za leto 2018") +
+  ylab("Plača (v EUR)") + 
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, hjust=1))
+
+
+# plače v Evropi za leto 2008 in 2018
 
 graf.placEvropa <- ggplot(place_Evropa %>% 
          filter(Leto %in% c("2008","2018")) %>%
@@ -128,21 +143,6 @@ graf.bdpEvropa <- ggplot(bdp_pc_Evropa %>%
                                            fill="Povprecje 2008")), col="#F8766D") +
   labs(title = "BDP na prebivalca v evropskih državah za leto 2008 in 2018", fill="Leto") + 
   theme_bw()
-
-
-# plače v posameznih državah v primerjavi s Slovenijo
-drzave <- c("Austria", "Slovenia", "Croatia", "Germany","Cyprus")
-
-graf.drzave <- ggplot(place_Evropa %>% filter(Drzava %in% drzave),
-                      aes(x=Leto, y=Placa)) + 
-  geom_line(aes(color=factor(Drzava))) +
-  geom_point(aes(color=factor(Drzava))) + 
-  scale_x_continuous(breaks=2008:2018) +
-  ylab("Plača (v EUR)") +
-  labs(title="Primerjava plač v nekaterih evropskih državah", color="Država") +
-  theme_bw()
-
-
 
 # rast povprecnih plač in bdp za celotno Evropo
 barve <- c("Plače" = "#D95F02", "BDP na prebivalca" = "#1B9E77" )
