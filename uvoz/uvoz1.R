@@ -61,6 +61,10 @@ uvoz.plac <- function(){
 }
 
 place_Evropa <- uvoz.plac()
+Drzava <- place_Evropa$Drzava %>% trimws()
+Placa <- place_Evropa$Placa
+Leto <- place_Evropa$Leto
+place_Evropa <- data.frame(Leto,Drzava,Placa)
 
 
 uvoz.csv <- function(ime, stolpci, od) {
@@ -95,5 +99,14 @@ rast.BDP <- bdp_Evropa %>%
   summarise(povprecje=round(mean(BDP))) %>%
   mutate(rast=(povprecje-lag(povprecje))/povprecje*100) %>% select(Leto, rast) %>% drop_na()
 
+place.bdp <- left_join(place_Evropa,bdp_Evropa) %>% drop_na()
 
+
+#shranjevanje tabel
+write.csv2(place_SLO,"podatki/SLO_place_posodobljeno.csv")  
+write.csv2(bdp_SLO, file="podatki/SLO_bdp_posodobljeno.csv")
+write.csv2(bdp_pc_SLO, file="podatki/SLO_bdp_pc_posodobljeno.csv")
+write.csv(place_Evropa, file="podatki/Evropa_place_posodobljeno.csv")
+write.csv(bdp_Evropa, file="podatki/Evropa_bdp_posodobljeno.csv")
+write.csv(bdp_pc_Evropa, file="podatki/SLO_bdp_pc_posodobljeno.csv")
 

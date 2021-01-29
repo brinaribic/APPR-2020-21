@@ -1,0 +1,385 @@
+"","Leto","Drzava","Placa"
+"1",2008,"Iceland",3358
+"2",2008,"Luxembourg",4051
+"3",2008,"Norway",4149
+"4",2008,"Austria",3410
+"5",2008,"Ireland",3682
+"6",2008,"Germany",3103
+"7",2008,"Belgium",2936
+"8",2008,"Finland",2876
+"9",2008,"Sweden",2821
+"10",2008,"United Kingdom",3172
+"11",2008,"Spain",2014
+"12",2008,"Cyprus",1801
+"13",2008,"Slovenia",1391
+"14",2008,"Estonia",825
+"15",2008,"Czech Republic",906
+"16",2008,"Portugal",1008
+"17",2008,"Croatia",1044
+"18",2008,"Poland",837
+"19",2008,"Hungary",792
+"20",2008,"Slovakia",773
+"21",2008,"Latvia",682
+"22",2008,"Romania",478
+"23",2008,"Lithuania",623
+"24",2008,"Montenegro",609
+"25",2008,"Bosnia and Herzegovina",569
+"26",2008,"Bulgaria",279
+"27",2008,"Serbia",561
+"28",2008,"North Macedonia",430
+"29",2008,"Georgia",244
+"30",2008,"Moldova",165
+"31",2008,"Armenia",194
+"32",2008,"Ukraine",234
+"33",2008,"Azerbaijan",227
+"34",2009,"Iceland",2461
+"35",2009,"Denmark",5799
+"36",2009,"Luxembourg",4168
+"37",2009,"Norway",4044
+"38",2009,"Austria",3492
+"39",2009,"Ireland",3698
+"40",2009,"Germany",3141
+"41",2009,"Belgium",3027
+"42",2009,"Finland",2971
+"43",2009,"Sweden",2627
+"44",2009,"United Kingdom",2904
+"45",2009,"Spain",2065
+"46",2009,"Cyprus",1870
+"47",2009,"Slovenia",1439
+"48",2009,"Estonia",784
+"49",2009,"Czech Republic",883
+"50",2009,"Portugal",1034
+"51",2009,"Croatia",1051
+"52",2009,"Poland",717
+"53",2009,"Hungary",712
+"54",2009,"Slovakia",745
+"55",2009,"Latvia",655
+"56",2009,"Romania",435
+"57",2009,"Lithuania",596
+"58",2009,"Montenegro",643
+"59",2009,"Bosnia and Herzegovina",616
+"60",2009,"Bulgaria",311
+"61",2009,"Serbia",470
+"62",2009,"North Macedonia",491
+"63",2009,"Georgia",239
+"64",2009,"Moldova",177
+"65",2009,"Armenia",189
+"66",2009,"Ukraine",175
+"67",2009,"Azerbaijan",266
+"68",2010,"Iceland",2662
+"69",2010,"Denmark",4960
+"70",2010,"Luxembourg",4276
+"71",2010,"Norway",4584
+"72",2010,"Austria",3540
+"73",2010,"Ireland",3697
+"74",2010,"Germany",3227
+"75",2010,"Belgium",3103
+"76",2010,"Finland",3040
+"77",2010,"Sweden",2977
+"78",2010,"United Kingdom",3021
+"79",2010,"Spain",2126
+"80",2010,"Cyprus",1915
+"81",2010,"Slovenia",1495
+"82",2010,"Estonia",792
+"83",2010,"Czech Republic",944
+"84",2010,"Portugal",1075
+"85",2010,"Croatia",1054
+"86",2010,"Poland",807
+"87",2010,"Hungary",735
+"88",2010,"Slovakia",769
+"89",2010,"Latvia",633
+"90",2010,"Romania",452
+"91",2010,"Lithuania",576
+"92",2010,"Montenegro",715
+"93",2010,"Bosnia and Herzegovina",622
+"94",2010,"Bulgaria",331
+"95",2010,"Serbia",460
+"96",2010,"North Macedonia",495
+"97",2010,"Georgia",253
+"98",2010,"Moldova",181
+"99",2010,"Armenia",207
+"100",2010,"Ukraine",214
+"101",2010,"Azerbaijan",311
+"102",2011,"Iceland",2850
+"103",2011,"Denmark",5037
+"104",2011,"Luxembourg",4376
+"105",2011,"Norway",4889
+"106",2011,"Austria",3625
+"107",2011,"Ireland",3669
+"108",2011,"Germany",3311
+"109",2011,"Belgium",3192
+"110",2011,"Finland",3109
+"111",2011,"Sweden",3210
+"112",2011,"United Kingdom",3033
+"113",2011,"Spain",2157
+"114",2011,"Cyprus",1967
+"115",2011,"Slovenia",1525
+"116",2011,"Estonia",839
+"117",2011,"Czech Republic",995
+"118",2011,"Portugal",1084
+"119",2011,"Croatia",1049
+"120",2011,"Poland",825
+"121",2011,"Hungary",763
+"122",2011,"Slovakia",786
+"123",2011,"Latvia",660
+"124",2011,"Romania",467
+"125",2011,"Lithuania",593
+"126",2011,"Montenegro",722
+"127",2011,"Bosnia and Herzegovina",650
+"128",2011,"Bulgaria",351
+"129",2011,"Serbia",517
+"130",2011,"North Macedonia",500
+"131",2011,"Georgia",271
+"132",2011,"Moldova",196
+"133",2011,"Armenia",208
+"134",2011,"Ukraine",239
+"135",2011,"Azerbaijan",331
+"136",2012,"Iceland",3036
+"137",2012,"Denmark",5144
+"138",2012,"Luxembourg",4487
+"139",2012,"Norway",5298
+"140",2012,"Austria",3728
+"141",2012,"Ireland",3708
+"142",2012,"Germany",3391
+"143",2012,"Belgium",3258
+"144",2012,"Finland",3206
+"145",2012,"Sweden",3423
+"146",2012,"United Kingdom",3268
+"147",2012,"Spain",2169
+"148",2012,"Cyprus",1988
+"149",2012,"Slovenia",1525
+"150",2012,"Estonia",887
+"151",2012,"Czech Republic",997
+"152",2012,"Portugal",1095
+"153",2012,"Croatia",1048
+"154",2012,"Poland",841
+"155",2012,"Hungary",771
+"156",2012,"Slovakia",805
+"157",2012,"Latvia",685
+"158",2012,"Romania",463
+"159",2012,"Lithuania",615
+"160",2012,"Montenegro",727
+"161",2012,"Bosnia and Herzegovina",660
+"162",2012,"Bulgaria",374
+"163",2012,"Serbia",508
+"164",2012,"North Macedonia",501
+"165",2012,"Kosovo",431
+"166",2012,"Georgia",336
+"167",2012,"Moldova",223
+"168",2012,"Armenia",219
+"169",2012,"Ukraine",296
+"170",2012,"Azerbaijan",394
+"171",2013,"Iceland",3239
+"172",2013,"Denmark",5190
+"173",2013,"Luxembourg",4616
+"174",2013,"Norway",5251
+"175",2013,"Austria",3817
+"176",2013,"Ireland",3726
+"177",2013,"Germany",3449
+"178",2013,"Belgium",3300
+"179",2013,"Finland",3284
+"180",2013,"Sweden",3538
+"181",2013,"United Kingdom",3177
+"182",2013,"Spain",2183
+"183",2013,"Cyprus",1945
+"184",2013,"Slovenia",1523
+"185",2013,"Estonia",949
+"186",2013,"Czech Republic",964
+"187",2013,"Portugal",1093
+"188",2013,"Croatia",1048
+"189",2013,"Poland",870
+"190",2013,"Hungary",777
+"191",2013,"Slovakia",824
+"192",2013,"Latvia",716
+"193",2013,"Romania",489
+"194",2013,"Lithuania",646
+"195",2013,"Montenegro",726
+"196",2013,"Bosnia and Herzegovina",660
+"197",2013,"Bulgaria",396
+"198",2013,"Serbia",537
+"199",2013,"North Macedonia",500
+"200",2013,"Kosovo",444
+"201",2013,"Georgia",350
+"202",2013,"Moldova",225
+"203",2013,"Armenia",269
+"204",2013,"Ukraine",309
+"205",2013,"Azerbaijan",408
+"206",2014,"Iceland",3636
+"207",2014,"Denmark",5246
+"208",2014,"Luxembourg",4734
+"209",2014,"Norway",5064
+"210",2014,"Austria",3880
+"211",2014,"Ireland",3736
+"212",2014,"Germany",3527
+"213",2014,"Belgium",3414
+"214",2014,"Finland",3308
+"215",2014,"Sweden",3452
+"216",2014,"United Kingdom",3371
+"217",2014,"Spain",2206
+"218",2014,"Cyprus",1892
+"219",2014,"Slovenia",1540
+"220",2014,"Estonia",1005
+"221",2014,"Czech Republic",936
+"222",2014,"Portugal",1093
+"223",2014,"Croatia",1042
+"224",2014,"Poland",904
+"225",2014,"Hungary",770
+"226",2014,"Slovakia",858
+"227",2014,"Latvia",765
+"228",2014,"Romania",524
+"229",2014,"Lithuania",677
+"230",2014,"Montenegro",723
+"231",2014,"Bosnia and Herzegovina",659
+"232",2014,"Bulgaria",420
+"233",2014,"Serbia",524
+"234",2014,"North Macedonia",510
+"235",2014,"Kosovo",482
+"236",2014,"Albania",325
+"237",2014,"Georgia",349
+"238",2014,"Moldova",224
+"239",2014,"Armenia",287
+"240",2014,"Ukraine",221
+"241",2014,"Azerbaijan",426
+"242",2015,"Iceland",4183
+"243",2015,"Denmark",5331
+"244",2015,"Luxembourg",4811
+"245",2015,"Norway",4758
+"246",2015,"Austria",3973
+"247",2015,"Ireland",3755
+"248",2015,"Germany",3612
+"249",2015,"Belgium",3445
+"250",2015,"Finland",3333
+"251",2015,"Sweden",3420
+"252",2015,"United Kingdom",3773
+"253",2015,"Spain",2204
+"254",2015,"Cyprus",1882
+"255",2015,"Slovenia",1556
+"256",2015,"Estonia",1065
+"257",2015,"Czech Republic",975
+"258",2015,"Portugal",1097
+"259",2015,"Croatia",1058
+"260",2015,"Poland",932
+"261",2015,"Hungary",800
+"262",2015,"Slovakia",883
+"263",2015,"Latvia",818
+"264",2015,"Romania",575
+"265",2015,"Lithuania",714
+"266",2015,"Montenegro",725
+"267",2015,"Bosnia and Herzegovina",659
+"268",2015,"Bulgaria",449
+"269",2015,"Serbia",506
+"270",2015,"North Macedonia",525
+"271",2015,"Kosovo",510
+"272",2015,"Albania",343
+"273",2015,"Georgia",357
+"274",2015,"Moldova",221
+"275",2015,"Armenia",323
+"276",2015,"Ukraine",173
+"277",2015,"Azerbaijan",410
+"278",2016,"Iceland",4963
+"279",2016,"Denmark",5412
+"280",2016,"Luxembourg",4848
+"281",2016,"Norway",4661
+"282",2016,"Austria",4081
+"283",2016,"Ireland",3803
+"284",2016,"Germany",3703
+"285",2016,"Belgium",3489
+"286",2016,"Finland",3368
+"287",2016,"Sweden",3463
+"288",2016,"United Kingdom",3442
+"289",2016,"Spain",2213
+"290",2016,"Cyprus",1879
+"291",2016,"Slovenia",1585
+"292",2016,"Estonia",1146
+"293",2016,"Czech Republic",1027
+"294",2016,"Portugal",1108
+"295",2016,"Croatia",1030
+"296",2016,"Poland",928
+"297",2016,"Hungary",845
+"298",2016,"Slovakia",912
+"299",2016,"Latvia",859
+"300",2016,"Romania",626
+"301",2016,"Lithuania",774
+"302",2016,"Montenegro",751
+"303",2016,"Bosnia and Herzegovina",665
+"304",2016,"Bulgaria",485
+"305",2016,"Serbia",516
+"306",2016,"North Macedonia",535
+"307",2016,"Kosovo",519
+"308",2016,"Albania",346
+"309",2016,"Georgia",359
+"310",2016,"Moldova",231
+"311",2016,"Armenia",328
+"312",2016,"Ukraine",183
+"313",2016,"Azerbaijan",283
+"314",2017,"Iceland",5865
+"315",2017,"Denmark",5531
+"316",2017,"Luxembourg",5007
+"317",2017,"Norway",4751
+"318",2017,"Austria",4164
+"319",2017,"Ireland",3867
+"320",2017,"Germany",3771
+"321",2017,"Belgium",3558
+"322",2017,"Finland",3395
+"323",2017,"Sweden",3499
+"324",2017,"United Kingdom",2451
+"325",2017,"Spain",2243
+"326",2017,"Cyprus",1892
+"327",2017,"Slovenia",1627
+"328",2017,"Estonia",1221
+"329",2017,"Czech Republic",1126
+"330",2017,"Portugal",1133
+"331",2017,"Croatia",1080
+"332",2017,"Poland",1003
+"333",2017,"Hungary",961
+"334",2017,"Slovakia",954
+"335",2017,"Latvia",926
+"336",2017,"Romania",706
+"337",2017,"Lithuania",840
+"338",2017,"Montenegro",765
+"339",2017,"Bosnia and Herzegovina",675
+"340",2017,"Bulgaria",530
+"341",2017,"Serbia",544
+"342",2017,"North Macedonia",549
+"343",2017,"Kosovo",528
+"344",2017,"Albania",365
+"345",2017,"Georgia",353
+"346",2017,"Moldova",274
+"347",2017,"Armenia",326
+"348",2017,"Ukraine",237
+"349",2017,"Azerbaijan",272
+"350",2018,"Iceland",5645
+"351",2018,"Denmark",5626
+"352",2018,"Luxembourg",5143
+"353",2018,"Norway",4753
+"354",2018,"Austria",4261
+"355",2018,"Ireland",3966
+"356",2018,"Germany",3880
+"357",2018,"Finland",3465
+"358",2018,"Sweden",3373
+"359",2018,"United Kingdom",2389
+"360",2018,"Spain",2295
+"361",2018,"Cyprus",1939
+"362",2018,"Slovenia",1682
+"363",2018,"Estonia",1310
+"364",2018,"Czech Republic",1243
+"365",2018,"Portugal",1170
+"366",2018,"Croatia",1139
+"367",2018,"Poland",1076
+"368",2018,"Hungary",1035
+"369",2018,"Slovakia",1013
+"370",2018,"Latvia",1004
+"371",2018,"Romania",965
+"372",2018,"Lithuania",924
+"373",2018,"Montenegro",766
+"374",2018,"Bosnia and Herzegovina",697
+"375",2018,"Bulgaria",586
+"376",2018,"Serbia",580
+"377",2018,"North Macedonia",579
+"378",2018,"Kosovo",558
+"379",2018,"Albania",396
+"380",2018,"Georgia",376
+"381",2018,"Moldova",325
+"382",2018,"Armenia",303
+"383",2018,"Ukraine",276
+"384",2018,"Azerbaijan",271

@@ -82,34 +82,34 @@ Spodnji zemljevid prikazuje povprečne plače v posameznih regijah. Razvidno je,
 print(zemljevid.plac)
 ```
 
+Plače se razlikujejo tudi glede na starost. Po pričakovanjih plače rastejo s starostjo, nisem pa pričakovala, da je tako velika ralika med skupino z najstarejšimi delovno aktivnimi prebivalci in ostalimi skupinami.
+
+```{r graf1}
+print(graf.starost)
+```
+
+
 Spodnja dva grafa prikazujeta plače in BDP na prebivalca v regijah z najvišjimi plačami in regiji z najnižjimi plačami. 
-```{r graf45, figures-side, fig.show="hold", out.width="50%"}
+```{r graf23, figures-side, fig.show="hold", out.width="50%"}
 print(graf.bdp)
 print(graf.plac)
 ```
 
 V preteklosti so bile razlike med spoli zelo velike na vseh področjih. To se seveda pozna tudi pri plačah. Iz spodnjega grafa je razvidno, da se ta razlika zmanjšuje. Opazim pa tudi, da so plače pri moških bolj nihale  kot pa pri ženskah, pri le teh v opazovanem obdobju zgolj naraščajo. 
-```{r graf3, fig.align='center'}
+```{r graf4, fig.align='center'}
 print(graf.spol)
 ```
 
 V Evropi so velike razlike med povprečnimi plačami v državah. Iz spodnjega grafa opazim, da je večina držav pod evropskim povprečjem. Opazim pa tudi, da so se plače v razvitejših državah nekoliko bolj povečale v letu 2018 glede na leto 2008, kar nakazuje še na večjo neenakost med državami. Izjema je zgolj Velika Britanija, v kateri so se plače v opazovanem obdobju znižale. Sklepam, da zato, ker jih leta 2008 kriza še ni prizadela oz. se to ni poznalo pri plačah, potem pa si niso opomogli še desetletje po krizi.
 
-```{r graf4, fig.align='center'}
+```{r graf5, fig.align='center'}
 print(graf.placEvropa)
 ```
 Plače so le eden izmed pokazateljev razlik med državami v Evropi. Eden izmed glavnih je BDP na prebivalca. To prikazuje spodnja tabela. Opazim, da so velike razlike med državami tudi glede na BDP.
 
-```{r graf5, fig.align='center'}
+```{r graf6, fig.align='center'}
 print(graf.bdpEvropa)
 ```
-
-Spodnji graf prikazuje primerjavo plač zgolj nekaterih evropskih držav. Izbrala sem le tiste, ki imajo podobne plače kot v Sloveniji in Avstrijo ter Nemčijo. Avstrijo sem izbrala zato, ker je veliko Slovencev tam zaposlenih, še posebej tistih, ki živijo na koroškem. To je tudi razlog, da so v tej regiji plače v višjo kot v večina ostalih regijah (razvidno je iz zgornjega zemljevida).
-
-```{r graf6, fig.align='center'}
-print(graf.drzave)
-```
-
 
 Zadnji graf prikazuje rast BDP na prebivalca in rast plač v Evropi. Na začetku opazovanega obdobja (med letoma 2009 in 2010) je BDP močno narastel, saj so države v večini že vzpostavljale nazaj gospodarstvo po krizi. Plače pa so padale še kar nekaj let po krizi, šele med letoma 2014 in 15 so se povečale.
 ```{r graf7, fig.align='center'}
@@ -120,16 +120,17 @@ print(graf.rasti)
 ```{r analiza, results='hide'}
 source("analiza/analiza.r", encoding="UTF-8")
 ```
-Spodnji graf prikazuje plače do leta 2020 v Sloveniji. Vidim, da pride do velikega odstopanja, saj model ne more napovedati krize, še posebej ne takšne vrste krize, ki je bila leta 2020
+Spodnji graf prikazuje skupine evropskih držav po metodi voditeljev glede na plačo in bdp na prebivalca. Opazim, da je največ držav v prvi skupini, katerim sta se tako plača kot BPD na prebivalca v opazovanem obdobju najmanj povečala. Najmanj držav pa je v zadnji skupini, in sicer z najvišjimi plačami in bdp na prebivalca. Tukaj sta se obe komponenti največ povečevali, hkrati pa je med temi državami največ razlik, npr. nekatere države imajo visok BDP na prebivalca, ne pa tako visoke plače, medtem ko druge imajo nekoliko nižji BDP na prebivalca, plače pa tako visoke kot države z višjim BDP na prebivalca.
 
-```{r napoved1, fig.align='center'}
-print(graf.napoved1)
+```{r skupine, fig.align='center'}
+print(skupine)
 ```
 
-
-```{r shiny}
+V *shiny* aplikaciji so prikazani podatki za posamezno državo.
+```{r shiny starost}
 shinyAppDir("shiny", options=list(width="100%", height=600))
 ```
+
 
 
 ***
