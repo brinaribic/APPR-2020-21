@@ -14,14 +14,20 @@ Tabele:
 1. Plače v SLoveniji glede na statistično regijo, spol in starost
 - stolpci: leto, statistična regija, spol, starost, plače
 
-2. BDP in BDP na prebivalca v Sloveniji po statističnih regijah
+2. BDP v Sloveniji po statističnih regijah
 - stolpci: leto, statistična regija, BDP (v mio EUR), BDP na prebivalca (v EUR)
 
-3. Plače v Evropi po posameznih državah
+3. BDP na prebivalca v Sloveniji po statističnih regijah
+- stolpci: leto, statistična regija, BDP na prebivalca (v EUR)
+
+4. Plače v Evropi po posameznih državah
 - stolpci: leto, država, plače
 
-4. BDP in BDP na prebivalca po državah v Evropi
-- stolpci: leto, država, BDP (v mio EUR), BDP na prebivalca (v EUR)
+5. BDP in BDP na prebivalca po državah v Evropi
+- stolpci: leto, država, BDP (v mio EUR)
+
+6.  BDP na prebivalca po državah v Evropi
+- stolpci: leto, država, BDP na prebivalca (v EUR)
 
 Viri:
 
