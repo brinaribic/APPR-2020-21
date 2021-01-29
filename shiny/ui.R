@@ -1,16 +1,23 @@
 library(shiny)
+library(markdown)
 
 fluidPage(
-  selectInput(inputId = "regija",
-              label = "Izberi regijo",
-              choices = unique(place_SLO$Regija), 
-              selected=unique(place_SLO$Regija)[1]),
-  radioButtons(inputId = "spol", 
-              label = "Izberi spol",
-              choices = unique(place_SLO$Spol), 
-              selected = unique(place_SLO$Spol)[1]),
-  plotOutput("starosti")
+
+sidebarPanel(
+              selectInput(inputId = "drzava",
+                          label = "Izberi državo",
+                          choices = unique(place_Evropa$Drzava),
+                          selected = unique(place_Evropa$Drzava)[13]),
+              verbatimTextOutput("povzetek")
+           ),
+           mainPanel(
+             tabsetPanel(
+               tabPanel("Tabela",
+                    DT::dataTableOutput("table")),
+               tabPanel("Plače in BDP",
+                        plotOutput("place"),
+                        plotOutput("bdp"))
+                    )
+           
+           )
 )
-
-
-  
