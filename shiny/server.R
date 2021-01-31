@@ -10,7 +10,8 @@ function(input, output) {
        geom_line() +
        ylab("Plača * 1000 (v EUR)") +
        scale_x_continuous(breaks=2008:2018) +
-       theme_bw()
+       theme_bw() +
+       theme(axis.text.x = element_text(angle = 45, hjust=1)) 
    })
    output$bdp <- renderPlot({
       ggplot(bdp_Evropa %>%
@@ -21,7 +22,8 @@ function(input, output) {
          geom_line() +
          ylab("BDP * 10000 (v mio EUR)") +
          scale_x_continuous(breaks=2008:2018) +
-         theme_bw()
+         theme_bw() +
+         theme(axis.text.x = element_text(angle = 45, hjust=1))
    })
    output$table <- DT::renderDataTable({
       DT::datatable(place.bdp %>% filter(Drzava == input$drzava),options = list(dom = 't'))

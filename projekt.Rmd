@@ -128,7 +128,7 @@ print(skupine)
 
 V *shiny* aplikaciji so prikazani podatki za posamezno državo.
 ```{r shiny starost}
-shinyAppDir("shiny", options=list(width="100%", height=600))
+shinyAppDir("shiny", options=list(width="100%", height=900))
 ```
 
 
